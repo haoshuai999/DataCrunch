@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'datacrunch/show'
+
+  get 'datacrunch/show'
+
   get 'datacrunch/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
