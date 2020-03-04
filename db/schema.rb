@@ -14,19 +14,19 @@
 ActiveRecord::Schema.define(version: 20200304145401) do
 
   create_table "datacrunches", force: :cascade do |t|
-    t.string   "filename"
     t.string   "title"
     t.string   "username"
+    t.datetime "createtime"
     t.text     "description"
-    t.string   "datatype"
+    t.string   "datatye"
     t.string   "size"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username", null: false
-    t.string   "password", null: false
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

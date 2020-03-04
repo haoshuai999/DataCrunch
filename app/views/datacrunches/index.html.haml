@@ -1,4 +1,18 @@
-%h1 Welcome to the index page
+= form_tag datacrunches_path do
+
+  = label :user, :username, 'User Name'
+  = text_field :user, 'user name'
+
+  = label :user, :password, 'Password'
+  = text_field :user, "password"
+
+  = submit_tag 'Log in', :class => 'btn btn-primary'
+
+= form_tag new_user_path, :method => 'get' do
+
+  = submit_tag 'Sign up', :class => 'btn btn-primary'
+  
+%h1 Data Crunch
 
 
 = form_tag datacrunches_path, :class =>'upload-form', :multipart=>true do
