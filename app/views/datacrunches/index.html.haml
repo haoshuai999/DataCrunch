@@ -1,5 +1,15 @@
 %h1 Welcome to the index page
 
 
-%label{:for => "data-file"} Date File
-%input{:name => "data-file", :type => "file"}/
+= form_tag datacrunches_path, :class =>'upload-form', :multipart=>true do
+
+  = file_field_tag 'Upload', accept: '.csv, .json, .xlsx'
+
+  = label :datacrunch, :title, 'Title'
+  = text_field :datacrunch, 'title'
+
+  = label :datacrunch, :description, 'Description'
+  = text_field :datacrunch, "describe your data"
+
+
+  = submit_tag 'Upload', :class => 'btn btn-primary'

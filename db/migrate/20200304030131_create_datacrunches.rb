@@ -1,6 +1,7 @@
 class CreateDatacrunches < ActiveRecord::Migration
   def change
     create_table :datacrunches do |t|
+      t.string :filename
       t.string :title
       t.string :username
       t.text :description

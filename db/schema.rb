@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20200304145401) do
 
   create_table "datacrunches", force: :cascade do |t|
+    t.string   "filename"
     t.string   "title"
     t.string   "username"
     t.text     "description"

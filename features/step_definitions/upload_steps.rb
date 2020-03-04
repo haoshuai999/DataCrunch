@@ -12,8 +12,8 @@ end
 
 
 When /^(?:I) upload a (.+) file called "(.+)"$/ do |file_type, file_name|
-    attach_file('data-file', 'app/assets/Uploads/'+file_name)
-    
+    attach_file('Upload', 'app/assets/Uploads/'+file_name)
+    click_button('Upload')
 
 end
 
