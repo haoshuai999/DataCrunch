@@ -6,15 +6,15 @@ Feature: Upload File
 
 Scenario: Upload csv
     Given I am on the index page
-    When I upload a csv file
-    Then I should see my file
+    When I upload a csv file called "data.csv"
+    Then I should see "data.csv"
 
 Scenario: Upload json
     Given I am on the index page
-    When I upload a json file
-    Then I should see my file
+    When I upload a json file called "data.json"
+    Then I should see "data.json"
 
 Scenario: Upload xlsx
     Given I am on the index page
-    When I upload a xlsx file
-    Then I should see my file
+    When I upload a xlsx file called "data.xlsx"
+    Then I should see "data.xslx"
