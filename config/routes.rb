@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
-  get 'datacrunch/show'
+  # get 'datacrunch/show'
 
-  get 'datacrunch/show'
-
-  get 'datacrunch/index'
+  # get 'datacrunch/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+  
+
   # You can have the root of your site routed with "root"
-  root 'datacrunch#index'
+  root 'datacrunches#index'
 
 
   # Example of regular route:
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-
+  resources :datacrunches
   # Example resource route with options:
   #   resources :products do
   #     member do
