@@ -5,19 +5,19 @@ Feature: View data
    I want to see the columns and rows of my dataset
 
 Scenario: Upload csv
-    Given I have uploaded a csv
+    Given I have uploaded a csv file
     When I click view
     Then I should be redirected to the view page
     And I should see my columns and rows
 
 Scenario: Upload json
-    Given I have uploaded a json
+    Given I have uploaded a json file
     When I click view
     Then I should be redirected to the view page
     And I should see my columns and rows
 
 Scenario: Upload xlsx
-    Given I have uploaded a csv
+    Given I have uploaded a xlsx file
     When I click view
     Then I should be redirected to the view page
     And I should see my columns and rows

@@ -7,4 +7,7 @@ Given /^(?:I) am on the (.+)$/ do |page_name|
 end
 
 When /^(?:I) upload a (.+) file$/ do |file_type|
+    #Creating an entry in the 
 end
+
+Then 
