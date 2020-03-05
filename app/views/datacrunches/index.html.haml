@@ -1,16 +1,19 @@
-= form_tag datacrunches_path do
+- if params[:user_login]
+  %p= params[:user_login]
+- else
+  = form_tag datacrunches_path, :id => "login_form" do
 
-  = label :user, :username, 'User Name'
-  = text_field :user, 'username', value: params[:username]
+    = label :user, :username, 'User Name'
+    = text_field :user, 'username', value: params[:username]
 
-  = label :user, :password, 'Password'
-  = text_field :user, "password"
+    = label :user, :password, 'Password'
+    = text_field :user, "password"
 
-  = submit_tag 'Log in', :class => 'btn btn-primary'
+    = submit_tag 'Log in', :class => 'btn btn-primary'
 
-= form_tag new_user_path, :method => 'get' do
+  = form_tag new_user_path, :method => 'get' do
 
-  = submit_tag 'Sign up', :class => 'btn btn-primary'
+    = submit_tag 'Sign up', :class => 'btn btn-primary'
 
 #flash-display
   - flash.each do |type, msg|
@@ -19,9 +22,10 @@
       = msg if msg.is_a?(String)
  
 %h1 Data Crunch
+- User.all.each do |user|
+  = user.username
 
-
-= form_tag datacrunches_path, :class =>'upload-form', :multipart=>true do
+= form_tag datacrunches_path, :multipart=>true, :id => "upload-form" do
 
   = file_field_tag 'Upload', accept: '.csv, .json, .xlsx'
 

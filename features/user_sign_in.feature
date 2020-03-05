@@ -4,9 +4,16 @@ Feature: Sign in
    So that I can maintain my work on the site
    I want to be able to log in
 
+Scenario: User fails to sign in
+    Given I am on the index page
+    And I type "aaron123" as a username
+    And I type "columbia" as a password
+    When I click the "Log in" button
+    Then I should see "Cannot find the user"
+
 Scenario: User successfully sign in
     Given I am on the index page
-    And there is an account called "journo_guy" with the password "pulitzer"
-    When I enter the username "journo_guy" into the username field
-    And I enter the password "pulitzer" into the password field
-    Then I should see "journo_guy" in the nav bar
+    And I type "jim123" as a username
+    And I type "columbia" as a password
+    When I click the "Log in" button
+    Then I should see "jim123"
