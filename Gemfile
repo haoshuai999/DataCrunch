@@ -28,6 +28,9 @@ gem 'public_suffix', '3.0.1'
 
 gem "haml-rails", "~> 1.0.0"
 
+gem "paperclip", "~> 6.0.0"
+gem "csv"
+# gem "paperclip", "~> 3.5.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -37,8 +40,7 @@ gem "haml-rails", "~> 1.0.0"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'haml-rails', '~> 1.0.0'
-# gem 'haml'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

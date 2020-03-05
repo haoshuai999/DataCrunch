@@ -11,22 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200304145401) do
+ActiveRecord::Schema.define(version: 20200305005504) do
 
   create_table "datacrunches", force: :cascade do |t|
-    t.string   "filename"
     t.string   "title"
     t.string   "username"
     t.text     "description"
-    t.string   "datatype"
-    t.string   "size"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",   null: false
-    t.string   "password",   null: false
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
