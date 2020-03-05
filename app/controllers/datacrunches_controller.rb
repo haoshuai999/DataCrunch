@@ -9,6 +9,7 @@ class DatacrunchesController < ApplicationController
         if request[:user]
             @username = request[:user][:username]
             @password = request[:user][:password]
+            puts User.all.size
             if User.where({ username: @username, password: @password }).size > 0
                 redirect_to datacrunches_path(:user_login => @username)
             else
