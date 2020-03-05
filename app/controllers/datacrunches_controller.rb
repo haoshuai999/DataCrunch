@@ -11,7 +11,7 @@ class DatacrunchesController < ApplicationController
             session[:username] = params[:username]
             flash[:notice] = "#{params[:username]} becomes a new registered user for Datacrunch!"
         elsif !session[:username].nil?
-            params[:username] = session[:username]
+            params[:user_login] = session[:username]
         end
     end
 
@@ -38,12 +38,20 @@ class DatacrunchesController < ApplicationController
 
     def new
     end
+
     def show
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
         @file_path = display_file(@datacrunch)
     end
 
     def showall
+        puts session[:username]
+        if !session[:username].nil?
+            params[:user_login] = session[:username]
+            @datacrunches = Datacrunch.where({ username: @username })
+        elsif
+            @datacrunches = Datacrunch.all
+        end
         
     end
 

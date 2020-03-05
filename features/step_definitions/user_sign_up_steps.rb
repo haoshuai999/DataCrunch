@@ -3,12 +3,11 @@ require 'cgi'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
   
 When /^I click the \"(.*)\" button$/ do |button_name|
-    # puts page.body
     click_button(button_name)
 end
 
-Then /^I should be redirected to the (.*)$/ do |page_name|
-    visit path_to(page_name)
+Then /^I should be redirected to the (.*) page$/ do |page_name|
+    page.current_url == path_to(page_name)
 end
 
 And /^I type \"(.*)\" as a (.*)$/ do |user_input, field_name|
