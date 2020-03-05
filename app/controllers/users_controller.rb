@@ -8,6 +8,6 @@ class UsersController < ApplicationController
 
     def create
         @user = User.create!(user_params)
-        redirect_to datacrunches_path(:username => @user.username)
+        redirect_to datacrunches_path(:newusername => @user.username)
     end
 end

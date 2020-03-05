@@ -7,12 +7,16 @@ class DatacrunchesController < ApplicationController
    
    
     def index
-        if !params[:username].nil?
-            session[:username] = params[:username]
-            flash[:notice] = "#{params[:username]} becomes a new registered user for Datacrunch!"
+        # Sign up as a new user
+        if !params[:newusername].nil?
+            session[:username] = params[:newusername]
+            flash[:notice] = "#{params[:newusername]} becomes a new registered user for Datacrunch!"
+        elsif !params[:user_login].nil?
+            session[:username] = params[:user_login]
         elsif !session[:username].nil?
             params[:user_login] = session[:username]
         end
+        puts session[:username]
     end
 
     def create
