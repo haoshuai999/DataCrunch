@@ -28,6 +28,8 @@ gem 'public_suffix', '3.0.1'
 
 gem "haml-rails", "~> 1.0.0"
 
+gem 'rspec'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
