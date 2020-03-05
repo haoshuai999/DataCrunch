@@ -8,6 +8,7 @@ class DatacrunchesController < ApplicationController
    
     def index
         if !params[:username].nil?
+            session[:username] = params[:username]
             flash[:notice] = "#{params[:username]} becomes a new registered user for Datacrunch!"
         end
     end

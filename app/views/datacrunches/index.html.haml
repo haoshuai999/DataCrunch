@@ -14,12 +14,6 @@
   = form_tag new_user_path, :method => 'get' do
 
     = submit_tag 'Sign up', :class => 'btn btn-primary'
-
-#flash-display
-  - flash.each do |type, msg|
-    %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
-      %button.close &times;
-      = msg if msg.is_a?(String)
  
 %h1 Data Crunch
 - User.all.each do |user|
