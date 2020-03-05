@@ -1,0 +1,9 @@
+= form_tag users_path do
+
+  = label :user, :username, 'User Name'
+  = text_field :user, 'username'
+
+  = label :user, :password, 'Password'
+  = text_field :user, "password"
+
+  = submit_tag 'Submit', :class => 'btn btn-primary'

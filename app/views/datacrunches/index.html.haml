@@ -1,5 +1,29 @@
-%h1 Welcome to the index page
+- if params[:user_login]
+  %p= params[:user_login]
+- else
+  = form_tag datacrunches_path, :id => "login_form" do
 
+    = label :user, :username, 'User Name'
+    = text_field :user, 'username', value: params[:username]
+
+    = label :user, :password, 'Password'
+    = text_field :user, "password"
+
+    = submit_tag 'Log in', :class => 'btn btn-primary'
+
+  = form_tag new_user_path, :method => 'get' do
+
+    = submit_tag 'Sign up', :class => 'btn btn-primary'
+
+#flash-display
+  - flash.each do |type, msg|
+    %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
+      %button.close &times;
+      = msg if msg.is_a?(String)
+ 
+%h1 Data Crunch
+- User.all.each do |user|
+  = user.username
 
 = form_for :datacrunch, url: datacrunches_path, :class =>'upload-form', html: { multipart: true} do |form|
   = form.file_field :data, accept: '.csv, .json, .xlsx', :required => true
@@ -20,4 +44,3 @@
     %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
       = sanitize(msg) if msg.is_a?(String)
       -# = "Check it out" + "#{view_context.link_to('here', datacrunch_path(@datacrunch))}."
-

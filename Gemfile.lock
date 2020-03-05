@@ -85,6 +85,9 @@ GEM
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     database_cleaner (1.8.3)
+    database_cleaner-active_record (1.8.0)
+      activerecord
+      database_cleaner (~> 1.8.0)
     debug_inspector (0.0.3)
     diff-lcs (1.3)
     erubis (2.7.0)
@@ -172,6 +175,19 @@ GEM
       ffi (~> 1.0)
     rdoc (4.3.0)
     regexp_parser (1.7.0)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
+    rspec-expectations (3.9.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-support (3.9.2)
     ruby_parser (3.14.2)
       sexp_processor (~> 4.9)
     sass (3.7.4)
@@ -229,12 +245,14 @@ DEPENDENCIES
   csv
   cucumber-rails
   database_cleaner
+  database_cleaner-active_record
   haml-rails (~> 1.0.0)
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 6.0.0)
   public_suffix (= 3.0.1)
   rails (= 4.2.10)
+  rspec
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

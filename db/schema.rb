@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20200305005504) do
   create_table "datacrunches", force: :cascade do |t|
     t.string   "title"
     t.string   "username"
+    t.datetime "createtime"
     t.text     "description"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false

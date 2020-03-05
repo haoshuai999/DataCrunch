@@ -31,6 +31,8 @@ gem "haml-rails", "~> 1.0.0"
 gem "paperclip", "~> 6.0.0"
 gem "csv"
 # gem "paperclip", "~> 3.5.0"
+gem 'rspec'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,6 +53,7 @@ end
 
 group :test do
   gem 'cucumber-rails', require: false
+  gem 'database_cleaner-active_record'
 end
 
 group :development do
