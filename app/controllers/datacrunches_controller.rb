@@ -43,4 +43,8 @@ class DatacrunchesController < ApplicationController
         @file_path = display_file(@datacrunch)
     end
 
+    def showall
+        
+    end
+
 end
