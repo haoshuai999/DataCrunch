@@ -10,6 +10,8 @@ class DatacrunchesController < ApplicationController
         if !params[:username].nil?
             session[:username] = params[:username]
             flash[:notice] = "#{params[:username]} becomes a new registered user for Datacrunch!"
+        elsif !session[:username].nil?
+            params[:username] = session[:username]
         end
     end
 

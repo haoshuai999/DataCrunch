@@ -13,8 +13,11 @@ module NavigationHelpers
     when /index\s?page/
       '/'
 
-    when /create\s?user page/
+    when /create\s?user\s?page/
       '/users/new'
+
+    when /show\s?all\s?page/
+      '/datacrunches/showall'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

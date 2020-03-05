@@ -1,0 +1,19 @@
+- if params[:user_login]
+  %p= params[:user_login]
+
+%h1 Data Crunch
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th User
+      %th Created Time
+      %th More Info
+  %tbody
+    - @datacrunches.each do |crunch|
+      %tr
+        %td= crunch.title
+        %td= crunch.username
+        %td= crunch.release_date
+        %td= link_to "More about #{crunch.title}", movie_path(crunch)
