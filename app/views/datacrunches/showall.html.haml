@@ -3,6 +3,11 @@
 
 %h1 Data Crunch
 
+= form_tag datacrunches_showall_path, :method => "get" do  
+
+  = search_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
+  = button_tag "search", :id => 'search_button', :name => nil
+
 %table
   %thead
     %tr
