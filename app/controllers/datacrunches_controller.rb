@@ -17,7 +17,7 @@ class DatacrunchesController < ApplicationController
         if request[:user]
             @username = request[:user][:username]
             @password = request[:user][:password]
-            puts User.all.size
+            # puts User.all.size
             if User.where({ username: @username, password: @password }).size > 0
                 redirect_to datacrunches_path(:user_login => @username)
             else
@@ -26,9 +26,9 @@ class DatacrunchesController < ApplicationController
             end
         else
             @datacrunch = Datacrunch.create!(datacrunch_params)
-            puts @datacrunch.id
+            # puts @datacrunch.id
     
-            flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch))}".html_safe
+            flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data")}".html_safe
             # flash[:notice] = %Q[#{@datacrunch.data_file_name} was successfully uploaded.]
             redirect_to datacrunches_path
         end
@@ -38,7 +38,7 @@ class DatacrunchesController < ApplicationController
     end
     def show
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
-        @file_path = display_file(@datacrunch)
+        @data = display_file(@datacrunch)
     end
 
 end

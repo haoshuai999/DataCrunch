@@ -1,4 +1,18 @@
-%h3 Welcome to the Datacrunch
+%h1= link_to "Datacrunch", datacrunches_path 
 
-%p#filename= @datacrunch.data_file_name 
-%p#filepath= @file_path
+%p#filename 
+    File name: 
+    %strong #{@datacrunch.data_file_name}
+%p#title 
+    File title: 
+    %strong #{@datacrunch.title}
+%p#description 
+    File description: 
+    %strong #{@datacrunch.description}
+
+
+%table
+    - @data.each do |r|
+        %tr
+        - r.each do |c|
+            %td= c

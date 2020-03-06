@@ -1,14 +1,29 @@
 module DatacrunchesHelper
     require 'csv'
+    require 'roo'
+    require 'json'
+    require 'json_converter'
+    
+
     
     
     
     def display_file(datacrunch)
         # puts datacrunch.data.methods
         path = File.join Rails.root, 'public'
+        file_path = File.join(path,datacrunch.data.url)
+        file_ext = File.extname(datacrunch.data.url).downcase
+
+        case file_ext
+        when ".csv"
+            data = handle_csv(file_path)
+        when ".xlsx", ".xls"
+            data = handle_excel(file_path)
+        when ".json"
+            data = handle_json(file_path)
+        end
         
-        data_array = []
-        csv_version = CSV.read(File.join(path,datacrunch.data.url))
+       
         # File.open(File.join(path,datacrunch.data.url)) do |fi|
         #     begin
         #         0.times {fi.readline}
@@ -17,6 +32,37 @@ module DatacrunchesHelper
         #     end
         # end
 
-        return csv_version.take(4)
+        return data
+    end
+
+
+    def handle_csv(file_path)
+        data_array = []
+        csv = CSV.read(file_path)
+        puts csv.class
+        return csv
+    end
+
+    def handle_excel(file_path)
+        xls_file = Roo::Excelx.new(file_path)
+        csv = CSV.parse(xls_file.to_csv)
+        # puts CSV.parse(csv)
+        return csv
+    end
+
+    def handle_json(file_path)
+        json_file = JSON.parse(File.open(file_path).read)
+        # csv_string = CSV.generate do |csv|
+        #     json_file.each do |hash|
+        #         csv << hash.values
+        #     end 
+        # end 
+        # puts csv_string
+        json_converter = JsonConverter.new
+        csv = json_converter.generate_csv json_file
+        csv = CSV.parse(csv)
+        puts csv
+        
+        return csv
     end
 end

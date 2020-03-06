@@ -28,8 +28,10 @@ gem 'public_suffix', '3.0.1'
 
 gem "haml-rails", "~> 1.0.0"
 
-gem "paperclip", "~> 6.0.0"
-gem "csv"
+gem "paperclip", "~> 6.0.0" #For uploading files and associating them with datacrunches
+gem "csv" #For reading csv's
+gem "roo" #For reading xslx's
+gem "json_converter"
 # gem "paperclip", "~> 3.5.0"
 gem 'rspec'
 

@@ -1,0 +1,24 @@
+[{
+  "name":"John",
+  "age":30,
+  "cars": {
+    "car1":"Ford",
+    "car2":"BMW",
+    "car3":"Fiat"
+  },
+{
+  "name":"tim",
+  "age":34,
+  "cars": {
+    "car1":"Dodge",
+    "car2":"GMC",
+    "car3":"Toyota"
+  },
+{
+  "name":"Alice",
+  "age":44,
+  "cars": {
+    "car1":"Buwick",
+    "car2":"Chrysler",
+    "car3":"Pontiac"
+  }]
