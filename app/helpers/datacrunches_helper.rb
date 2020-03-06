@@ -11,9 +11,9 @@ module DatacrunchesHelper
     def display_file(datacrunch)
         # puts datacrunch.data.methods
         path = File.join Rails.root, 'public'
-        file_path = File.join(path,datacrunch.data.url)
-        file_ext = File.extname(datacrunch.data.url).downcase
-
+        file_path_with_timestamp = File.join(path,datacrunch.data.url)
+        file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
+        file_path = file_path_with_timestamp.split("?")[0]
         case file_ext
         when ".csv"
             data = handle_csv(file_path)
@@ -23,14 +23,6 @@ module DatacrunchesHelper
             data = handle_json(file_path)
         end
         
-       
-        # File.open(File.join(path,datacrunch.data.url)) do |fi|
-        #     begin
-        #         0.times {fi.readline}
-        #         1000.times.each{ data_array += CSV.parse(fi.readline)}
-        #     rescue EOFError
-        #     end
-        # end
 
         return data
     end
@@ -39,7 +31,7 @@ module DatacrunchesHelper
     def handle_csv(file_path)
         data_array = []
         csv = CSV.read(file_path)
-        puts csv.class
+        
         return csv
     end
 
@@ -52,7 +44,7 @@ module DatacrunchesHelper
 
     def handle_json(file_path)
         json_file = JSON.parse(File.open(file_path).read)
-  
+        
         json_converter = JsonConverter.new
         csv_json = json_converter.generate_csv json_file
         csv = CSV.parse(csv_json)
