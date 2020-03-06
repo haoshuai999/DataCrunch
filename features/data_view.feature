@@ -2,7 +2,7 @@ Feature: View data
 
    As a journalist
    So that I can see my data
-   I want to see the columns and rows of my dataset
+   I want to see the columns of my dataset
 
 Scenario: Upload csv
     Given I am on the index page

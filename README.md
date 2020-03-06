@@ -1,6 +1,35 @@
 # Data Crunch: know your data
 
-Team members: Aaron Brezel and Shuai Hao
+Team members: Aaron Brezel (ab4717) and Shuai Hao (sh3831)
+
+### User stories
+
+| As a journalist                            |
+|--------------------------------------------|
+| So that I can maintain my work on the site |
+| I want to be able to sign up a new account |
+
+| As a journalist                            |
+|--------------------------------------------|
+| So that I can maintain my work on the site |
+| I want to be able to log in |
+
+| As a journalist                            |
+|--------------------------------------------|
+| So that I can see my data |
+| I want to upload a file |
+
+| As a journalist                            |
+|--------------------------------------------|
+| So that I see my data |
+| I want to see the columns of my dataset |
+
+| As a journalist                            |
+|--------------------------------------------|
+| So that I can manage my data files easily |
+| I want to see a list showing all the files I upload |
+
+
 
 ### Pain points
 
