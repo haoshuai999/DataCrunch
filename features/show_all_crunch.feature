@@ -4,7 +4,7 @@ Feature: View data
    So that I can manage my data files easily
    I want to see a list showing all the files I upload
 
-Background: users and datacrunches have been added to database
+Background: users and datacrunches have been added to database and the user has signed in
 
     Given the following users exist:
     | username | password |
@@ -23,21 +23,29 @@ Background: users and datacrunches have been added to database
 
     And I am on the index page
     Then 4 example datacrunches should exist
-    When I upload a csv file called "data.csv"
-    Then I should see "data.csv"
     
-
-Scenario: User sign in and click show all
+    # Log in
     Given I am on the index page
     And I type "jim123" as a username
     And I type "columbia" as a password
     When I click the "Log in" button
     Then I should see "jim123"
+
+    # Upload the file for "jim123"
+    When I upload a csv file called "data.csv"
+    Then I should see "data.csv"
+    
+
+Scenario: Click show all
     When I click the "Show all datacrunches" button
     Then I should be redirected to the show all page
 
 Scenario: Show all the data
     Given I am on the show all page
-    Then I should see the file "a" uploaded by "jim123"
+    Then I should see 3 files uploaded by "jim123"
     When I click the link of the "data.csv" file
     Then I should see my columns and rows from the "data.csv" file
+
+Scenario: Should not see data from other users
+    Given I am on the show all page
+    Then I should not see files uploaded by "shuai"

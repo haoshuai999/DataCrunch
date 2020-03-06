@@ -12,7 +12,7 @@ Background: users have been added to database
     | shuai    | hello |
 
     And I am on the index page
-    Then 2 example user should exist
+    Then 2 example users should exist
 
 Scenario: User fails to sign in
     Given I am on the index page

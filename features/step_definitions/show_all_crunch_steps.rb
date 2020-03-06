@@ -18,10 +18,16 @@ Then /^(.*) example datacrunches should exist$/ do | n_seeds |
     Datacrunch.count.should be n_seeds.to_i
 end
 
-Then /^I should see the file \"(.*)\" uploaded by \"(.*)\"$/ do |file_title, user_name|
+Then /^I should see (.*) files uploaded by \"(.*)\"$/ do |file_number, user_name|
     with_scope("tbody") do
-        page.should have_content(file_title)
+        page.should have_selector('tr', count: file_number)
         page.should have_content(user_name)
+    end
+end
+
+Then /^I should not see files uploaded by \"(.*)\"$/ do |user_name|
+    with_scope("tbody") do
+        page.should have_no_content(user_name)
     end
 end
 

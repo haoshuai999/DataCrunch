@@ -7,6 +7,7 @@
   %thead
     %tr
       %th Title
+      %th Descrption
       %th File_Name
       %th User
       %th Created_Time
@@ -15,6 +16,7 @@
     - @datacrunches.each do |crunch|
       %tr
         %td= crunch.title
+        %td= crunch.description
         %td= crunch.data_file_name
         %td= crunch.username
         %td= crunch.created_at
