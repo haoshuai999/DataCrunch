@@ -52,16 +52,10 @@ module DatacrunchesHelper
 
     def handle_json(file_path)
         json_file = JSON.parse(File.open(file_path).read)
-        # csv_string = CSV.generate do |csv|
-        #     json_file.each do |hash|
-        #         csv << hash.values
-        #     end 
-        # end 
-        # puts csv_string
+  
         json_converter = JsonConverter.new
-        csv = json_converter.generate_csv json_file
-        csv = CSV.parse(csv)
-        puts csv
+        csv_json = json_converter.generate_csv json_file
+        csv = CSV.parse(csv_json)
         
         return csv
     end
