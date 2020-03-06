@@ -44,7 +44,7 @@ Scenario: Show all the data
     Given I am on the show all page
     Then I should see 3 files uploaded by "jim123"
     When I click the link of the "data.csv" file
-    Then I should see my columns and rows from the "data.csv" file
+    Then I should see my columns from "data.csv"
 
 Scenario: Should not see data from other users
     Given I am on the show all page
