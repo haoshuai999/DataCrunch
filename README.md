@@ -2,6 +2,8 @@
 
 Team members: Aaron Brezel (ab4717) and Shuai Hao (sh3831)
 
+## [Heroku link](https://calm-garden-33614.herokuapp.com/)
+
 ### User stories
 
 | As a journalist                            |
