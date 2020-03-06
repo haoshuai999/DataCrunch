@@ -36,13 +36,8 @@ class DatacrunchesController < ApplicationController
                 redirect_to datacrunches_path
             end
         else
-<<<<<<< HEAD
-            @datacrunch = Datacrunch.create!(datacrunch_params)
-            # puts @datacrunch.id
-=======
             datacrunch_params[:username] = session[:user_login]
             @datacrunch = Datacrunch.create!(datacrunch_params.merge(username: session[:username]))
->>>>>>> shuaihao
     
             flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data")}".html_safe
             # flash[:notice] = %Q[#{@datacrunch.data_file_name} was successfully uploaded.]
