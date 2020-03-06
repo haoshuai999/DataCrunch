@@ -1,5 +1,7 @@
 - if params[:user_login]
   %p= params[:user_login]
+  = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
+    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
   = form_tag datacrunches_showall_path, :method => 'get' do
     = submit_tag 'Show all datacrunches', :class => 'btn btn-primary', :id => 'showall'
 - else

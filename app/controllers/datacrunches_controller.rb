@@ -8,15 +8,20 @@ class DatacrunchesController < ApplicationController
    
     def index
         # Sign up as a new user
-        if !params[:newusername].nil?
+        if params[:newusername]
             session[:username] = params[:newusername]
             flash[:notice] = "#{params[:newusername]} becomes a new registered user for Datacrunch!"
-        elsif !params[:user_login].nil?
+        elsif params[:user_login]
             session[:username] = params[:user_login]
-        elsif !session[:username].nil?
+        elsif session[:username]
             params[:user_login] = session[:username]
         end
-        puts session[:username]
+
+        if request[:commit] == "Log out"
+            session.delete(:username)
+            params[:user_login] = nil
+        end
+        
     end
 
     def create
@@ -49,7 +54,6 @@ class DatacrunchesController < ApplicationController
     end
 
     def showall
-        puts session[:username]
         if !session[:username].nil?
             params[:user_login] = session[:username]
             @datacrunches = Datacrunch.where({ username: params[:user_login] })

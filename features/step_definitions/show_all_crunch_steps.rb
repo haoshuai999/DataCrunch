@@ -31,8 +31,7 @@ Then /^I should not see files uploaded by \"(.*)\"$/ do |user_name|
     end
 end
 
-When /^I click the link of the \"(.*)\" file$?/ do |file_name|
-    puts page.text
+When /^I click the link of the \"(.*)\" file$?/ do |file_name| 
     link = page.find('tr', :text => file_name)
     link_id = link.find_link[:id]
     click_link(link_id)

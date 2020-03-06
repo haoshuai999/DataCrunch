@@ -21,9 +21,11 @@ Scenario: User fails to sign in
     When I click the "Log in" button
     Then I should see "Cannot find the user"
 
-Scenario: User successfully sign in
+Scenario: User successfully sign in and log out
     Given I am on the index page
     And I type "jim123" as a username
     And I type "columbia" as a password
     When I click the "Log in" button
     Then I should see "jim123"
+    When I click the "Log out" button
+    Then I should see "User Name"

@@ -49,3 +49,8 @@ Scenario: Show all the data
 Scenario: Should not see data from other users
     Given I am on the show all page
     Then I should not see files uploaded by "shuai"
+
+Scenario: Search bar
+    Given I am on the show all page
+    When I click the "Search" button
+    Then I should be redirected to the show all page

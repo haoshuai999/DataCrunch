@@ -1,12 +1,13 @@
 - if params[:user_login]
   %p= params[:user_login]
-
+  = form_tag datacrunches_path, :method => 'get' do
+    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
 %h1 Data Crunch
 
 = form_tag datacrunches_showall_path, :method => "get" do  
 
   = search_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
-  = button_tag "search", :id => 'search_button', :name => nil
+  = button_tag "Search", :id => 'search_button', :name => nil
 
 %table
   %thead

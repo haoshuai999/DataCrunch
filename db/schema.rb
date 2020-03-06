@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200305200915) do
+ActiveRecord::Schema.define(version: 20200305005504) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "datacrunches", force: :cascade do |t|
     t.string   "title"
