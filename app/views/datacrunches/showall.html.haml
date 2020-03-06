@@ -9,6 +9,10 @@
   = search_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
   = button_tag "Search", :id => 'search_button', :name => nil
 
+-# #flash-display
+-#   - flash.each do |type, msg|
+-#     %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
+-#       = sanitize(msg) if msg.is_a?(String)
 %table
   %thead
     %tr

@@ -54,9 +54,17 @@ class DatacrunchesController < ApplicationController
     end
 
     def showall
-        if !session[:username].nil?
+        if session[:username]
             params[:user_login] = session[:username]
             @datacrunches = Datacrunch.where({ username: params[:user_login] })
+            # if params[:search]
+            #     search_keyword = @datacrunches.find_by(description: params[:search])
+            #     if search_keyword
+            #         @datacrunches = @datacrunches.where(description: params[:user_login])
+            #     else
+            #         flash[:notice] = "Cannot find what you want"
+            #     end
+            # end
         elsif
             @datacrunches = Datacrunch.all
         end
