@@ -7,14 +7,20 @@ module NavigationHelpers
   #
   # step definition in web_steps.rb
   #
-  def path_to(page_name)
+  def path_to(page_name, path = "")
     case page_name
 
-    when /index\s?page/
+    when /index/
       '/'
 
-    when /create\s?user page/
+    when /create\s?user/
       '/users/new'
+
+    when /show\s?all/
+      '/datacrunches/showall'
+    
+    when /crunch\s?information/
+      path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -1,0 +1,33 @@
+- if params[:user_login]
+  %p= params[:user_login]
+  = form_tag datacrunches_path, :method => 'get' do
+    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
+%h1 Data Crunch
+
+= form_tag datacrunches_showall_path, :method => "get" do  
+
+  = search_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
+  = button_tag "Search", :id => 'search_button', :name => nil
+
+-# #flash-display
+-#   - flash.each do |type, msg|
+-#     %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
+-#       = sanitize(msg) if msg.is_a?(String)
+%table
+  %thead
+    %tr
+      %th Title
+      %th Descrption
+      %th File_Name
+      %th User
+      %th Created_Time
+      %th More Info
+  %tbody
+    - @datacrunches.each do |crunch|
+      %tr
+        %td= crunch.title
+        %td= crunch.description
+        %td= crunch.data_file_name
+        %td= crunch.username
+        %td= crunch.created_at
+        %td= link_to "More about #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}"

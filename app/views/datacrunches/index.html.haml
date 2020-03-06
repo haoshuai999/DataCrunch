@@ -1,5 +1,9 @@
 - if params[:user_login]
   %p= params[:user_login]
+  = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
+    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
+  = form_tag datacrunches_showall_path, :method => 'get' do
+    = submit_tag 'Show all datacrunches', :class => 'btn btn-primary', :id => 'showall'
 - else
   = form_tag datacrunches_path, :id => "login_form" do
 
@@ -16,8 +20,8 @@
     = submit_tag 'Sign up', :class => 'btn btn-primary'
  
 %h1 Data Crunch
-- User.all.each do |user|
-  = user.username
+-# - User.all.each do |user|
+-#   = user.username
 
 = form_for :datacrunch, url: datacrunches_path, :class =>'upload-form', html: { multipart: true} do |form|
   = form.file_field :data, accept: '.csv, .json, .xlsx', :required => true

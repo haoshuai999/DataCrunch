@@ -7,6 +7,6 @@ Given /the following users exist/ do |users_table|
     end
 end
 
-Then /^(.*) example user should exist$/ do | n_seeds |
+Then /^(.*) example users should exist$/ do | n_seeds |
     User.count.should be n_seeds.to_i
 end
