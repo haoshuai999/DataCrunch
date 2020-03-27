@@ -57,15 +57,15 @@ class DatacrunchesController < ApplicationController
         if session[:username]
             params[:user_login] = session[:username]
             @datacrunches = Datacrunch.where({ username: params[:user_login] })
-            # if params[:search]
-            #     search_keyword = @datacrunches.find_by(description: params[:search])
-            #     if search_keyword
-            #         @datacrunches = @datacrunches.where(description: params[:user_login])
-            #     else
-            #         flash[:notice] = "Cannot find what you want"
-            #     end
-            # end
-        elsif
+            if params[:search]
+                @search_keyword = params[:search].downcase
+                @datacrunches = @datacrunches.where("lower(title) LIKE :search OR lower(description) LIKE :search", search: "%#{@search_keyword}%")
+                if @datacrunches.empty?
+                    flash[:notice] = "Cannot find what you want"
+                end
+                flash.discard
+            end
+        else
             @datacrunches = Datacrunch.all
         end
         
