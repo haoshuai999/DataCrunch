@@ -16,6 +16,7 @@
 %table
   %thead
     %tr
+      %th 
       %th Title
       %th Descrption
       %th File_Name
@@ -25,6 +26,7 @@
   %tbody
     - @datacrunches.each do |crunch|
       %tr
+        %td= button_to 'Delete', datacrunch_path(crunch), :method => "delete", :confirm => 'Are you sure?', :class => 'btn btn-primary'
         %td= crunch.title
         %td= crunch.description
         %td= crunch.data_file_name
