@@ -68,6 +68,17 @@ class DatacrunchesController < ApplicationController
         else
             @datacrunches = Datacrunch.all
         end
+    
+    def edit
+        @datacrunches = Datacrunch.find(params[:id])
+    end
+
+    def update
+        @datacrunches = Datacrunch.find(params[:id])
+        @datacrunches.update_attributes!(datacrunch_params)
+        flash[:notice] = "Datacrunch '#{@datacrunches.title}' was successfully updated."
+        redirect_to datacrunches_showall_path
+    end
 
     def destroy
         # puts "hello"

@@ -1,0 +1,16 @@
+- if params[:user_login]
+  %p= params[:user_login]
+  = form_tag datacrunches_path, :method => 'get' do
+    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
+%h1 Data Crunch
+%h2 Edit Existing Datacrunches
+
+= form_tag datacrunch_path(@datacrunches), :method => :put do
+
+  = label :datacrunch, :title, 'Title'
+  = text_field :datacrunch, 'title', placeholder: @datacrunches.title
+
+  = label :movie, :rating, 'Description'
+  = text_field :datacrunch, 'description', placeholder: @datacrunches.description
+
+  = submit_tag 'Update Datacrunch Info', :class => 'btn btn-primary'

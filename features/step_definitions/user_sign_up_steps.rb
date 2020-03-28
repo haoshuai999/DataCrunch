@@ -11,7 +11,11 @@ Then /^I should be redirected to the (.*) page$/ do |page_name|
 end
 
 And /^I type \"(.*)\" as a (.*)$/ do |user_input, field_name|
-    fill_in("user_" + field_name, :with => user_input)
+    if field_name == "title"
+        fill_in("datacrunch_" + field_name, :with => user_input)
+    else
+        fill_in("user_" + field_name, :with => user_input)
+    end
 end
 
 And /^I should see \"(.*)\" in the username field$/ do |name_output|

@@ -23,13 +23,15 @@
       %th User
       %th Created_Time
       %th More Info
+      %th
   %tbody
     - @datacrunches.each do |crunch|
       %tr
-        %td= button_to 'Delete', datacrunch_path(crunch), :method => "delete", :confirm => 'Are you sure?', :class => 'btn btn-primary'
+        %td= button_to 'Delete', datacrunch_path(crunch), :method => "delete", data: {confirm: "Are you sure?"}, :class => 'btn btn-primary'
         %td= crunch.title
         %td= crunch.description
         %td= crunch.data_file_name
         %td= crunch.username
         %td= crunch.created_at
         %td= link_to "More about #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}"
+        %td= button_to 'Edit', edit_datacrunch_path(crunch), :method => 'get', :class => 'btn btn-primary'
