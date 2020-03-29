@@ -22,9 +22,8 @@ module DatacrunchesHelper
         when ".json"
             data = handle_json(file_path)
         end
-        
 
-        return data
+        return data #Returns csv of the data the use uploaded
     end
 
 
@@ -51,4 +50,14 @@ module DatacrunchesHelper
         
         return csv
     end
+
+    def calc_datacrunch_size(file_size)
+        #file_size comes in in bytes, need to convert to readable format
+        #print bytes, kb, mb and gb
+    end
+
+
+
+
+
 end

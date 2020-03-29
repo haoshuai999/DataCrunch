@@ -50,7 +50,8 @@ class DatacrunchesController < ApplicationController
 
     def show
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
-        @data = display_file(@datacrunch)
+        @data = display_file(@datacrunch) #Returns as a csv
+        @datasize = calc_datacrunch_size(@datacrunch.data_file_size)
     end
 
     def showall
