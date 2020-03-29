@@ -1,4 +1,4 @@
-Feature: View data
+Feature: Show all data
 
    As a journalist
    So that I can manage my data files easily

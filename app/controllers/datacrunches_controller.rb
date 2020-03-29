@@ -2,7 +2,7 @@ class DatacrunchesController < ApplicationController
     include DatacrunchesHelper
     
     def datacrunch_params
-        params.require(:datacrunch).permit(:data, :title, :description)
+        params.require(:datacrunch).permit(:data, :title, :description, :publicity => true)
     end
    
    
@@ -21,6 +21,9 @@ class DatacrunchesController < ApplicationController
             session.delete(:username)
             params[:user_login] = nil
         end
+
+        @datacrunches = Datacrunch.where({ publicity: true })
+        puts @datacrunches.empty?
         
     end
 

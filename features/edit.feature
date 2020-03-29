@@ -1,8 +1,8 @@
-Feature: View data
+Feature: Edit data
 
    As a journalist
    So that I can manage my data files easily
-   I want to see a list showing all the files I upload
+   I want to edit the files I upload
 
 Background: users and datacrunches have been added to database and the user has signed in
 
@@ -39,4 +39,4 @@ Scenario: edit datacrunches
     Given I am editing the file with id 1
     When I type "happy mouse" as a title
     And I click the "Update Datacrunch Info" button
-    Then I should see a row with the name "happy mouse" in the title field
+    Then I should see row 1 with the name "happy mouse" in column 2
