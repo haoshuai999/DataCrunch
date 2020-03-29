@@ -58,18 +58,37 @@ class DatacrunchesController < ApplicationController
         if session[:username]
             params[:user_login] = session[:username]
             @datacrunches = Datacrunch.where({ username: params[:user_login] })
-            # if params[:search]
-            #     search_keyword = @datacrunches.find_by(description: params[:search])
-            #     if search_keyword
-            #         @datacrunches = @datacrunches.where(description: params[:user_login])
-            #     else
-            #         flash[:notice] = "Cannot find what you want"
-            #     end
-            # end
-        elsif
+            if params[:search]
+                @search_keyword = params[:search].downcase
+                @datacrunches = @datacrunches.where("lower(title) LIKE :search OR lower(description) LIKE :search", search: "%#{@search_keyword}%")
+                if @datacrunches.empty?
+                    flash[:notice] = "Cannot find what you want"
+                end
+                flash.discard
+            end
+        else
             @datacrunches = Datacrunch.all
         end
-        
+    
+    def edit
+        @datacrunches = Datacrunch.find(params[:id])
+    end
+
+    def update
+        @datacrunches = Datacrunch.find(params[:id])
+        @datacrunches.update_attributes!(datacrunch_params)
+        flash[:notice] = "Datacrunch '#{@datacrunches.title}' was successfully updated."
+        redirect_to datacrunches_showall_path
+    end
+
+    def destroy
+        # puts "hello"
+        @datacrunches = Datacrunch.find(params[:id])
+        @datacrunches.destroy
+        flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
+        redirect_to datacrunches_showall_path
+    end
+
     end
 
 end

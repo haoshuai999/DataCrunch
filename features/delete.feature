@@ -9,20 +9,17 @@ Background: users and datacrunches have been added to database and the user has 
     Given the following users exist:
     | username | password |
     | jim123   | columbia |
-    | shuai    | hello |
 
     And I am on the index page
-    Then 2 example users should exist
+    Then 1 example users should exist
 
     Given the following datacrunches exist:
     | title | username | created_at | data_file_name |
-    | a | jim123 | 2020-03-04 21:38:13 UTC | data1.csv |
-    | b | jim123 | 2020-03-04 21:48:13 UTC | data2.csv | 
-    | c | shuai  | 2020-03-04 21:28:13 UTC | good.xlsx |
-    | d | shuai  | 2020-03-04 21:58:13 UTC | bad.xlsx  |
+    | datacrunch | jim123 | 2020-03-04 21:38:13 UTC | data1.csv |
+    | dummy | jim123 | 2020-03-04 21:48:13 UTC | data2.csv | 
 
     And I am on the index page
-    Then 4 example datacrunches should exist
+    Then 2 example datacrunches should exist
     
     # Log in
     Given I am on the index page
@@ -31,21 +28,10 @@ Background: users and datacrunches have been added to database and the user has 
     When I click the "Log in" button
     Then I should see "jim123"
 
-    # Upload the file for "jim123"
-    When I upload a csv file called "data.csv"
-    Then I should see "data.csv"
-    
-
-Scenario: Click show all
     When I click the "Show all datacrunches" button
     Then I should be redirected to the show all page
 
-Scenario: Show all the data
+Scenario: delete successfully
     Given I am on the show all page
-    Then I should see 3 files uploaded by "jim123"
-    When I click the link of the "data.csv" file
-    Then I should see my columns from "data.csv"
-
-Scenario: Should not see data from other users
-    Given I am on the show all page
-    Then I should not see files uploaded by "shuai"
+    When I click the "Delete" button to delete the file on the row 1
+    Then I should not see a row with the name "datacrunch" in the title field
