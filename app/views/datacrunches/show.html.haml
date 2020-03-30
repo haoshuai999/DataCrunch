@@ -11,11 +11,14 @@
     %strong #{@datacrunch.description}
 %p#filesize
     File size:
-    %strong #{@datasize} 
+    %strong #{@dataSize} 
+%p#filedimensions
+    Data dimensions:
+    %strong #{@dataDimensions} 
 
 
 %table
     - @data.each do |r|
         %tr
-        - r.each do |c|
+        - r.each do |c| 
             %td= c

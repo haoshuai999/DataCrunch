@@ -1,0 +1,58 @@
+{
+  "Forms": [
+    {
+      "Form": {
+        "id": "x",
+        "version_id": "x",
+        "name": "x",
+        "category": "",
+        "subcategory": null,
+        "is_template": null,
+        "moderation_status": "x",
+        "display_status": "x",
+        "use_ssl": "x",
+        "modified": "x",
+        "Aggregate_metadata": {
+          "id": "x",
+          "response_count": "x",
+          "submitted_count": "x",
+          "saved_count": "x",
+          "unread_count": "x",
+          "dropout_rate": "x",
+          "average_completion_time": null,
+          "is_uptodate": "x"
+        }
+      },
+      "User": {
+        "username": "somedude@example.com"
+      }
+    },
+    {
+      "Form": {
+        "id": "x",
+        "version_id": "x",
+        "name": "x",
+        "category": "",
+        "subcategory": null,
+        "is_template": null,
+        "moderation_status": "x",
+        "display_status": "x",
+        "use_ssl": "x",
+        "modified": "x",
+        "Aggregate_metadata": {
+          "id": "x",
+          "response_count": "x",
+          "submitted_count": "x",
+          "saved_count": "x",
+          "unread_count": "x",
+          "dropout_rate": "x",
+          "average_completion_time": null,
+          "is_uptodate": "x"
+        }
+      },
+      "User": {
+        "username": "somedude@example.com"
+      }
+    }
+  ]
+}

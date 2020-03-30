@@ -1,5 +1,6 @@
 class DatacrunchesController < ApplicationController
     include DatacrunchesHelper
+   
     
     def datacrunch_params
         params.require(:datacrunch).permit(:data, :title, :description)
@@ -51,7 +52,8 @@ class DatacrunchesController < ApplicationController
     def show
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
         @data = display_file(@datacrunch) #Returns as a csv
-        @datasize = calc_datacrunch_size(@datacrunch.data_file_size)
+        @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
+        @dataDimensions = calc_datacrunch_dimensions(@data)
     end
 
     def showall
