@@ -2,7 +2,7 @@ class DatacrunchesController < ApplicationController
     include DatacrunchesHelper
     
     def datacrunch_params
-        params.require(:datacrunch).permit(:data, :title, :description, :publicity => true)
+        params.require(:datacrunch).permit(:data, :title, :description, :publicity)
     end
    
    
@@ -23,7 +23,7 @@ class DatacrunchesController < ApplicationController
         end
 
         @datacrunches = Datacrunch.where({ publicity: true })
-        puts @datacrunches.empty?
+        #@datacrunches = Datacrunch.all
         
     end
 
@@ -41,7 +41,7 @@ class DatacrunchesController < ApplicationController
         else
             datacrunch_params[:username] = session[:user_login]
             @datacrunch = Datacrunch.create!(datacrunch_params.merge(username: session[:username]))
-    
+
             flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data")}".html_safe
             # flash[:notice] = %Q[#{@datacrunch.data_file_name} was successfully uploaded.]
             redirect_to datacrunches_path
