@@ -71,6 +71,7 @@ class DatacrunchesController < ApplicationController
         else
             @datacrunches = Datacrunch.all
         end
+    end
     
     def edit
         @datacrunches = Datacrunch.find(params[:id])
@@ -89,8 +90,6 @@ class DatacrunchesController < ApplicationController
         @datacrunches.destroy
         flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
         redirect_to datacrunches_showall_path
-    end
-
     end
 
 end
