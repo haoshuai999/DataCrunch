@@ -84,6 +84,8 @@ GEM
       railties (>= 4.2, < 7)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
+    d3-rails (5.9.2)
+      railties (>= 3.1)
     database_cleaner (1.8.3)
     database_cleaner-active_record (1.8.0)
       activerecord
@@ -249,6 +251,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   csv
   cucumber-rails
+  d3-rails
   database_cleaner
   database_cleaner-active_record
   haml-rails (~> 1.0.0)

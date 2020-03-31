@@ -35,5 +35,5 @@
         %td= crunch.username
         %td= crunch.created_at
         %td= crunch.publicity ? "public" : "private"
-        %td= link_to "More about #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}"
+        %td= link_to "More about #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}", :method => "get"
         %td= button_to 'Edit', edit_datacrunch_path(crunch), :method => 'get', :class => 'btn btn-primary'

@@ -35,6 +35,9 @@ gem "json_converter"
 # gem "paperclip", "~> 3.5.0"
 gem 'rspec'
 
+# Use data viz library d3
+gem "d3-rails"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

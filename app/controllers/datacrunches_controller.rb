@@ -54,6 +54,10 @@ class DatacrunchesController < ApplicationController
     def show
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
         @data = display_file(@datacrunch)
+        respond_to do |format|
+            format.html
+            format.json { render json: @data }
+        end
     end
 
     def showall
