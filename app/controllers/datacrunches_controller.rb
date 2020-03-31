@@ -67,9 +67,10 @@ class DatacrunchesController < ApplicationController
         @data = display_file(@datacrunch, flash[:cols], flash[:rows]) #Returns as a csv, flash messages denote dimensions of the data to display
         @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
     
-        @dataframe = Dataframe.new(@datacrunch)
+        @dataframe = Dataframe.new(@datacrunch) #creates workable df from datacruch record
+        @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
         # puts @dataframe.dataframe
-        @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns a 
+        @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
         
 
     end

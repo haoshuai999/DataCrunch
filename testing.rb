@@ -50,12 +50,12 @@ df_csv = Daru::DataFrame.read_csv('mock_data.csv') #Reading a csv
 df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
 # df_json =Daru::DataFrame.read_json('test_2.json')
 
-
-
+puts df_csv.inspect
+puts df_csv[0..4].first(2)
 
 # puts df_csv.inspect
 # puts df_excel.inspect
 # puts df_json.inspect
-puts csv_json
+
 
 

@@ -21,7 +21,7 @@
 %h3= link_to 'More rows', datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]+10), :method => :get, :class => 'btn btn-primary'
 
 %table
-    - @dataframe.dataframe.each(axis = :row) do |r|
+    - @display_dataframe.each(axis = :row) do |r|
         %tr
         - r.each do |c| 
             %td= c

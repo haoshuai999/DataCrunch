@@ -36,8 +36,8 @@ class Dataframe
         return @dataframe.ncols
     end 
 
-    def range(col)
-    
+    def limit(col, row)
+        return @dataframe[0..col].first(row)
     end 
 
 end 
