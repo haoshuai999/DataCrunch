@@ -1,16 +1,20 @@
+
+
+
+
 module DatacrunchesHelper
     require 'csv'
     require 'roo'
     require 'json'
     require 'json_converter'
     require 'pandas'
-    
-
-    
+   
     
     
-    def display_file(datacrunch)
-        # puts datacrunch.data.methods
+    
+    def display_file(datacrunch, ncols, nrows)
+        #Returns csv of the data the use uploaded, limited by nrows and nrows
+        # For faster processing, we should put 
         path = File.join Rails.root, 'public'
         file_path_with_timestamp = File.join(path,datacrunch.data.url)
         file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
@@ -24,14 +28,16 @@ module DatacrunchesHelper
             data = handle_json(file_path)
         end
 
-        return data #Returns csv of the data the use uploaded
+        trunc_data = truncate_data(data, ncols, nrows)
+
+        return trunc_data
     end
 
 
     def handle_csv(file_path)
         data_array = []
         csv = CSV.read(file_path)
-        
+        puts csv
         return csv
     end
 
@@ -39,6 +45,7 @@ module DatacrunchesHelper
         xls_file = Roo::Excelx.new(file_path)
         csv = CSV.parse(xls_file.to_csv)
         # puts CSV.parse(csv)
+        
         return csv
     end
 
@@ -47,8 +54,21 @@ module DatacrunchesHelper
         json_converter = JsonConverter.new
         csv_json = json_converter.generate_csv json_file
         csv = CSV.parse(csv_json)
+       
         return csv
     end
+
+    def truncate_data(data, ncols, nrows)
+    
+        trunc_data = data[0..nrows] #Limit number of rows
+
+        trunc_data.each_with_index do |row, index|
+            trunc_data[index] = row[0..ncols-1] #-1 to since functionally column index starts at 0 instead of 1 for rows
+        end 
+
+        return trunc_data
+    end 
+
 
     def calc_datacrunch_size(file_size)
         #file_size comes in in bytes, need to convert to readable format
@@ -70,15 +90,16 @@ module DatacrunchesHelper
         end
         return converted_size
     end
+    
 
-    def calc_datacrunch_dimensions(data)
-        columns = data[0].length
-        rows =  data[1..-1].length
-        # puts columns
-        # puts rows
-        # puts "#{columns} columns and #{rows}"
-        return "#{columns} columns and #{rows} rows"
-    end
+    # def calc_datacrunch_dimensions(data)
+    #     columns = data[0].length
+    #     rows =  data[1..-1].length
+    #     # puts columns
+    #     # puts rows
+    #     # puts "#{columns} columns and #{rows}"
+    #     return "#{columns} columns and #{rows} rows"
+    # end
 
 
     # def csv_to_df(csv)

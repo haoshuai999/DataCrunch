@@ -1,5 +1,6 @@
 class DatacrunchesController < ApplicationController
     include DatacrunchesHelper
+    require "#{Rails.root}/lib/dataframe.rb"
    
     
     def datacrunch_params
@@ -50,10 +51,27 @@ class DatacrunchesController < ApplicationController
     end
 
     def show
+        #flash is used here because it's accessible haml-side, there may be a more elegant way of doing this
+        if params[:cols] == nil
+            flash[:cols] = 10
+        else
+            flash[:cols] = params[:cols].to_i
+        end
+        if params[:rows] == nil
+            flash[:rows] = 10
+        else 
+            flash[:rows] = params[:rows].to_i
+        end
+
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
-        @data = display_file(@datacrunch) #Returns as a csv
+        @data = display_file(@datacrunch, flash[:cols], flash[:rows]) #Returns as a csv, flash messages denote dimensions of the data to display
         @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
-        @dataDimensions = calc_datacrunch_dimensions(@data)
+    
+        @dataframe = Dataframe.new(@datacrunch)
+        # puts @dataframe.dataframe
+        @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns a 
+        
+
     end
 
     def showall
@@ -72,24 +90,24 @@ class DatacrunchesController < ApplicationController
             @datacrunches = Datacrunch.all
         end
     
-    def edit
-        @datacrunches = Datacrunch.find(params[:id])
-    end
+        def edit
+            @datacrunches = Datacrunch.find(params[:id])
+        end
 
-    def update
-        @datacrunches = Datacrunch.find(params[:id])
-        @datacrunches.update_attributes!(datacrunch_params)
-        flash[:notice] = "Datacrunch '#{@datacrunches.title}' was successfully updated."
-        redirect_to datacrunches_showall_path
-    end
+        def update
+            @datacrunches = Datacrunch.find(params[:id])
+            @datacrunches.update_attributes!(datacrunch_params)
+            flash[:notice] = "Datacrunch '#{@datacrunches.title}' was successfully updated."
+            redirect_to datacrunches_showall_path
+        end
 
-    def destroy
-        # puts "hello"
-        @datacrunches = Datacrunch.find(params[:id])
-        @datacrunches.destroy
-        flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
-        redirect_to datacrunches_showall_path
-    end
+        def destroy
+        
+            @datacrunches = Datacrunch.find(params[:id])
+            @datacrunches.destroy
+            flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
+            redirect_to datacrunches_showall_path
+        end
 
     end
 

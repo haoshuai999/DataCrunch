@@ -15,6 +15,12 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Pandas gem for dataframe functions
 gem 'pandas'
+#daru gems for data analysis
+gem 'daru', '~> 0.1.5'
+gem 'daru-io'
+gem 'spreadsheet', '~> 1.1.1'
+gem 'jsonpath' #Probably not needed
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -33,9 +39,8 @@ gem "haml-rails", "~> 1.0.0"
 
 gem "paperclip", "~> 6.0.0" #For uploading files and associating them with datacrunches
 gem "csv" #For reading csv's
-gem "roo" #For reading xslx's
+gem "roo", '~> 2.7.0' #For reading xslx's
 gem "json_converter"
-# gem "paperclip", "~> 3.5.0"
 gem 'rspec'
 
 # Use ActiveModel has_secure_password

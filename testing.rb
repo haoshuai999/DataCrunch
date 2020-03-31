@@ -1,6 +1,13 @@
 # A testing file for some file manipulation helper functions
 require 'pandas'
 
+require 'daru'
+require 'daru/io/importers'
+
+# require 'jsonconverter'
+# require "#{Rails.root}/lib/dataframe.rb"
+
+
 def calc_datacrunch_size(file_size)
     #file_size comes in in bytes, need to convert to readable format
     #print bytes, kb, mb and gb
@@ -35,16 +42,20 @@ end
 
 
 
-file_size = 1231231231
-converted_size = calc_datacrunch_size(file_size)
+# file_size = 1231231231
+# converted_size = calc_datacrunch_size(file_size)
 
 
-df = Pandas.read_csv('mock_data.csv')
+df_csv = Daru::DataFrame.read_csv('mock_data.csv') #Reading a csv
+df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
+# df_json =Daru::DataFrame.read_json('test_2.json')
 
 
 
 
+# puts df_csv.inspect
+# puts df_excel.inspect
+# puts df_json.inspect
+puts csv_json
 
 
-
-puts converted_size

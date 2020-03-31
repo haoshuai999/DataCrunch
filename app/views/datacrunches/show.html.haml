@@ -16,9 +16,12 @@
     Data dimensions:
     %strong #{@dataDimensions} 
 
+//TODO: fix more dimension buttons to fade out after max cols/rows reached
+%h3= link_to 'More columns', datacrunch_path(@datacrunch, :cols => flash[:cols]+10, :rows => flash[:rows]), :method => :get, :class => 'btn btn-primary'
+%h3= link_to 'More rows', datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]+10), :method => :get, :class => 'btn btn-primary'
 
 %table
-    - @data.each do |r|
+    - @dataframe.dataframe.each(axis = :row) do |r|
         %tr
         - r.each do |c| 
             %td= c
