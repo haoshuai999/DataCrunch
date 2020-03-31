@@ -64,12 +64,12 @@ class DatacrunchesController < ApplicationController
         end
 
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
-        @data = display_file(@datacrunch, flash[:cols], flash[:rows]) #Returns as a csv, flash messages denote dimensions of the data to display
+        # @data = display_file(@datacrunch, flash[:cols], flash[:rows]) #Returns as a csv, flash messages denote dimensions of the data to display
         @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
     
         @dataframe = Dataframe.new(@datacrunch) #creates workable df from datacruch record
         @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
-        # puts @dataframe.dataframe
+        # puts @dataframe.dataframe[0..2].inspect
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
         
 

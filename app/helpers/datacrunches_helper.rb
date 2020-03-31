@@ -10,64 +10,65 @@ module DatacrunchesHelper
     require 'pandas'
    
     
-    
-    
-    def display_file(datacrunch, ncols, nrows)
-        #Returns csv of the data the use uploaded, limited by nrows and nrows
-        # For faster processing, we should put 
-        path = File.join Rails.root, 'public'
-        file_path_with_timestamp = File.join(path,datacrunch.data.url)
-        file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
-        file_path = file_path_with_timestamp.split("?")[0]
-        case file_ext
-        when ".csv"
-            data = handle_csv(file_path)
-        when ".xlsx", ".xls"
-            data = handle_excel(file_path)
-        when ".json"
-            data = handle_json(file_path)
-        end
+    ####################################################
+    # UNUSED 
+    ###################################################    
+    # def display_file(datacrunch, ncols, nrows)
+    #     #Returns csv of the data the use uploaded, limited by nrows and nrows
+    #     # For faster processing, we should put 
+    #     path = File.join Rails.root, 'public'
+    #     file_path_with_timestamp = File.join(path,datacrunch.data.url)
+    #     file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
+    #     file_path = file_path_with_timestamp.split("?")[0]
+    #     case file_ext
+    #     when ".csv"
+    #         data = handle_csv(file_path)
+    #     when ".xlsx", ".xls"
+    #         data = handle_excel(file_path)
+    #     when ".json"
+    #         data = handle_json(file_path)
+    #     end
 
-        trunc_data = truncate_data(data, ncols, nrows)
+    #     trunc_data = truncate_data(data, ncols, nrows)
 
-        return trunc_data
-    end
+    #     return trunc_data
+    # end
 
 
-    def handle_csv(file_path)
-        data_array = []
-        csv = CSV.read(file_path)
-        puts csv
-        return csv
-    end
+    # def handle_csv(file_path)
+    #     data_array = []
+    #     csv = CSV.read(file_path)
+    #     puts csv
+    #     return csv
+    # end
 
-    def handle_excel(file_path)
-        xls_file = Roo::Excelx.new(file_path)
-        csv = CSV.parse(xls_file.to_csv)
-        # puts CSV.parse(csv)
+    # def handle_excel(file_path)
+    #     xls_file = Roo::Excelx.new(file_path)
+    #     csv = CSV.parse(xls_file.to_csv)
+    #     # puts CSV.parse(csv)
         
-        return csv
-    end
+    #     return csv
+    # end
 
-    def handle_json(file_path)
-        json_file = JSON.parse(File.open(file_path).read)
-        json_converter = JsonConverter.new
-        csv_json = json_converter.generate_csv json_file
-        csv = CSV.parse(csv_json)
+    # def handle_json(file_path)
+    #     json_file = JSON.parse(File.open(file_path).read)
+    #     json_converter = JsonConverter.new
+    #     csv_json = json_converter.generate_csv json_file
+    #     csv = CSV.parse(csv_json)
        
-        return csv
-    end
+    #     return csv
+    # end
 
-    def truncate_data(data, ncols, nrows)
+    # def truncate_data(data, ncols, nrows)
     
-        trunc_data = data[0..nrows] #Limit number of rows
+    #     trunc_data = data[0..nrows] #Limit number of rows
 
-        trunc_data.each_with_index do |row, index|
-            trunc_data[index] = row[0..ncols-1] #-1 to since functionally column index starts at 0 instead of 1 for rows
-        end 
+    #     trunc_data.each_with_index do |row, index|
+    #         trunc_data[index] = row[0..ncols-1] #-1 to since functionally column index starts at 0 instead of 1 for rows
+    #     end 
 
-        return trunc_data
-    end 
+    #     return trunc_data
+    # end 
 
 
     def calc_datacrunch_size(file_size)

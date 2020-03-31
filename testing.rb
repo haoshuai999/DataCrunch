@@ -46,12 +46,19 @@ end
 # converted_size = calc_datacrunch_size(file_size)
 
 
-df_csv = Daru::DataFrame.read_csv('mock_data.csv') #Reading a csv
+df_csv = Daru::DataFrame.read_csv('FanGraphs Leaderboard.csv', liberal_parsing: true) #Reading a csv
 df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
-# df_json =Daru::DataFrame.read_json('test_2.json')
 
-puts df_csv.inspect
-puts df_csv[0..4].first(2)
+
+puts df_csv.vectors.inspect
+
+
+test = df_csv.filter do |vector| #How to limit by 
+     vector.type == :numeric
+
+end
+
+# puts test.inspect
 
 # puts df_csv.inspect
 # puts df_excel.inspect
