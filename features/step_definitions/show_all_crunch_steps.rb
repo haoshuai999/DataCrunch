@@ -10,7 +10,11 @@ World(WithinHelpers)
 
 Given /the following datacrunches exist/ do |datacrunches_table|
     datacrunches_table.hashes.each do |crunch|
-        Datacrunch.create!(:title => crunch[:title], :username => crunch[:username], :created_at => crunch[:created_at])
+        Datacrunch.create!(:title => crunch[:title], 
+                        :username => crunch[:username], 
+                        :created_at => crunch[:created_at], 
+                        :data_file_name => crunch[:data_file_name],
+                        :publicity => crunch[:publicity])
     end
 end
 

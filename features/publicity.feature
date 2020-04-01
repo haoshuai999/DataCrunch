@@ -1,8 +1,8 @@
-Feature: Delete data
+Feature: Public or Private
 
    As a journalist
    So that I can manage my data files easily
-   I want to delete the files I upload
+   I want to make some files public and keep others private
 
 Background: users and datacrunches have been added to database and the user has signed in
 
@@ -14,9 +14,9 @@ Background: users and datacrunches have been added to database and the user has 
     Then 1 example users should exist
 
     Given the following datacrunches exist:
-    | title | username | created_at | data_file_name |
-    | datacrunch | jim123 | 2020-03-04 21:38:13 UTC | data1.csv |
-    | dummy | jim123 | 2020-03-04 21:48:13 UTC | data2.csv | 
+    | title | username | created_at | data_file_name | publicity |
+    | datacrunch | jim123 | 2020-03-04 21:38:13 UTC | data1.csv | 1 |
+    | dummy | jim123 | 2020-03-04 21:48:13 UTC | data2.csv | 0 |
 
     And I am on the index page
     Then 2 example datacrunches should exist
@@ -28,10 +28,11 @@ Background: users and datacrunches have been added to database and the user has 
     When I click the "Log in" button
     Then I should see "jim123"
 
+Scenario: Only public file visible
+    Given I am on the index page
+    Then I should see row 1 with the name "datacrunch" in column 1
+    And I should see 1 data records
     When I click the "Show all datacrunches" button
-    Then I should be redirected to the show all page
+    Then I should see row 1 with the name "datacrunch" in column 2
+    And I should see row 2 with the name "dummy" in column 2 
 
-Scenario: delete successfully
-    Given I am on the show all page
-    When I click the "Delete" button to delete the file on the row 1
-    Then I should not see row 1 with the name "datacrunch" in column 2

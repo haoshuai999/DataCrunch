@@ -10,7 +10,10 @@
   = label :datacrunch, :title, 'Title'
   = text_field :datacrunch, 'title', placeholder: @datacrunches.title
 
-  = label :movie, :rating, 'Description'
+  = label :datacrunch, :rating, 'Description'
   = text_field :datacrunch, 'description', placeholder: @datacrunches.description
+
+  = label :datacrunch, :publicity, 'Publicity'
+  = select :datacrunch, :publicity, [['public', true], ['private', false]]
 
   = submit_tag 'Update Datacrunch Info', :class => 'btn btn-primary'

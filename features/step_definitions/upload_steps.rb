@@ -9,7 +9,9 @@ Given /^(?:I) am on the (.+)$/ do |page_name|
 
 end
 
-
+And /^I want the file to be (.*)$/ do |option|
+  page.select option, :from => 'datacrunch[publicity]'
+end
 
 When /^(?:I) upload a (.+) file called "(.+)"$/ do |file_type, file_name|
     attach_file('datacrunch[data]', 'app/assets/Uploads/'+file_name)

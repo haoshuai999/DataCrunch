@@ -1,8 +1,8 @@
-Feature: View data
+Feature: Search data
 
    As a journalist
    So that I can manage my data files easily
-   I want to see a list showing all the files I upload
+   I want to search for the files I upload
 
 Background: users and datacrunches have been added to database and the user has signed in
 
@@ -35,8 +35,8 @@ Scenario: Search successfully
     Given I am on the show all page
     When I type "dummy" in the search bar
     And I click the "Search" button
-    Then I should see a row with the name "dummy" in the title field
-    And I should not see a row with the name "datacrunch" in the title field
+    Then I should see row 1 with the name "dummy" in column 2
+    And I should not see row 1 with the name "datacrunch" in column 2
 
 Scenario: Search unsuccessfully
     Given I am on the show all page

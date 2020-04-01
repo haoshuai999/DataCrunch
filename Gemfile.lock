@@ -94,6 +94,8 @@ GEM
       backports
     daru-io (0.1.0)
       daru (~> 0.1.5)
+    d3-rails (5.9.2)
+      railties (>= 3.1)
     database_cleaner (1.8.3)
     database_cleaner-active_record (1.8.0)
       activerecord
@@ -272,8 +274,12 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   csv
   cucumber-rails
+<<<<<<< HEAD
   daru (~> 0.1.5)
   daru-io
+=======
+  d3-rails
+>>>>>>> shuaihao
   database_cleaner
   database_cleaner-active_record
   haml-rails (~> 1.0.0)

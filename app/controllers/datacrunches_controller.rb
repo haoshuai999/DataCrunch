@@ -4,7 +4,7 @@ class DatacrunchesController < ApplicationController
    
     
     def datacrunch_params
-        params.require(:datacrunch).permit(:data, :title, :description)
+        params.require(:datacrunch).permit(:data, :title, :description, :publicity)
     end
    
    
@@ -23,6 +23,9 @@ class DatacrunchesController < ApplicationController
             session.delete(:username)
             params[:user_login] = nil
         end
+
+        @datacrunches = Datacrunch.where({ publicity: true })
+        #@datacrunches = Datacrunch.all
         
     end
 
@@ -40,8 +43,8 @@ class DatacrunchesController < ApplicationController
         else
             datacrunch_params[:username] = session[:user_login]
             @datacrunch = Datacrunch.create!(datacrunch_params.merge(username: session[:username]))
-    
-            flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data")}".html_safe
+
+            flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data", :method => "get")}".html_safe
             # flash[:notice] = %Q[#{@datacrunch.data_file_name} was successfully uploaded.]
             redirect_to datacrunches_path
         end
@@ -71,7 +74,10 @@ class DatacrunchesController < ApplicationController
         @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
         # puts @dataframe.dataframe[0..2].inspect
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
-        
+        respond_to do |format|
+            format.html
+            format.text { render plain: @file_path }
+        end
 
     end
 
@@ -90,6 +96,7 @@ class DatacrunchesController < ApplicationController
         else
             @datacrunches = Datacrunch.all
         end
+    end
     
         def edit
             @datacrunches = Datacrunch.find(params[:id])
@@ -109,7 +116,5 @@ class DatacrunchesController < ApplicationController
             flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
             redirect_to datacrunches_showall_path
         end
-
-    end
 
 end
