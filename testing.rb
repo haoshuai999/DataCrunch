@@ -53,10 +53,7 @@ df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0)
 puts df_csv.vectors.inspect
 
 
-test = df_csv.filter do |vector| #How to limit by 
-     vector.type == :numeric
-
-end
+puts df_csv['SB'].describe.inspect
 
 # puts test.inspect
 

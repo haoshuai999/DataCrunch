@@ -1,7 +1,7 @@
 class Dataframe
     
     
-    attr_accessor :file_path, :dataframe
+    attr_accessor :file_path, :dataframe, :cat, :cont
     
     def initialize(datacrunch)
         #Calculating the file path
@@ -28,7 +28,16 @@ class Dataframe
             @dataframe = Daru::DataFrame.rows(csv[1..-1], order: csv[0]) #This assums first row in the json are the column names
         end
 
-        @dataframe.index
+        #Store which variables are continuous and categorical
+        @cat = Array.new
+        @cont = Array.new
+        @dataframe.filter do |vector| 
+            if vector.type == :numeric
+                @cont.append(vector.name)
+            else
+                @cat.append(vector.name)
+            end
+        end
 
      
     end 
@@ -43,6 +52,10 @@ class Dataframe
     def limit(col, row)
         return @dataframe[0..col+1].first(row+1)
     end 
+
+    def describe(colname)
+        return @dataframe[colname].describe
+    end
 
 end 
 
