@@ -42,7 +42,7 @@ class DatacrunchesController < ApplicationController
             datacrunch_params[:username] = session[:user_login]
             @datacrunch = Datacrunch.create!(datacrunch_params.merge(username: session[:username]))
 
-            flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data")}".html_safe
+            flash[:notice] = "#{@datacrunch.data_file_name} was successfully uploaded. Check it out #{view_context.link_to('here', datacrunch_path(@datacrunch), :id => "view_data", :method => "get")}".html_safe
             # flash[:notice] = %Q[#{@datacrunch.data_file_name} was successfully uploaded.]
             redirect_to datacrunches_path
         end
@@ -54,9 +54,10 @@ class DatacrunchesController < ApplicationController
     def show
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
         @data = display_file(@datacrunch)
+        data_url = @datacrunch.data.url.split("?")[0]
         respond_to do |format|
             format.html
-            format.json { render json: @data }
+            format.text { render plain: data_url }
         end
     end
 

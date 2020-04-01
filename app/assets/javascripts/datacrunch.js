@@ -3,7 +3,7 @@ var loadData = function(){
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       url: window.location.pathname,
-      dataType: 'json',
+      dataType: 'text',
       success: function(data){
         drawHistogram(data);
       },
