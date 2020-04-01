@@ -13,13 +13,14 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 
-# Pandas gem for dataframe functions
-gem 'pandas'
 #daru gems for data analysis
 gem 'daru', '~> 0.1.5'
 gem 'daru-io'
 gem 'spreadsheet', '~> 1.1.1'
-gem 'jsonpath' #Probably not needed
+
+#Modal gems
+gem 'bootstrap'
+gem 'popper_js', '~> 1.14.5'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

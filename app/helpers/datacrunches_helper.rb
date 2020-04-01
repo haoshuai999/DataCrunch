@@ -7,7 +7,7 @@ module DatacrunchesHelper
     require 'roo'
     require 'json'
     require 'json_converter'
-    require 'pandas'
+
    
     
     ####################################################
