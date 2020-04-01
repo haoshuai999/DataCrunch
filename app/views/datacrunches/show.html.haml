@@ -43,7 +43,7 @@
 %table
     %tr{"data-target" => "#statsModal", "data-toggle" => "modal"}
     - @display_dataframe.vectors.each  do |col| #displays the column names
-        %td= link_to col 
+        %td.colname= link_to col, datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]), data: {toggle: "modal", target: "#statsModal"}
     - @display_dataframe.each(axis = :row) do |r| #displays the dataframe contents
         %tr
         - r.each do |c| 
