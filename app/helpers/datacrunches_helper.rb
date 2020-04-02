@@ -7,6 +7,7 @@ module DatacrunchesHelper
     require 'roo'
     require 'json'
     require 'json_converter'
+    require "#{Rails.root}/lib/dataframe.rb"
 
    
     
@@ -92,7 +93,11 @@ module DatacrunchesHelper
         return converted_size
     end
     
-
+    def vector_to_json(vector)
+        #takes a daru vector and spits out a json
+        json = vector.to_json
+        puts json
+    end 
   
 
 

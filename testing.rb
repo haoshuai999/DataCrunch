@@ -1,8 +1,7 @@
-# A testing file for some file manipulation helper functions
-require 'pandas'
-
 require 'daru'
 require 'daru/io/importers'
+
+require 'json'
 
 # require 'jsonconverter'
 # require "#{Rails.root}/lib/dataframe.rb"
@@ -40,6 +39,11 @@ def calc_datacrunch_dimensions(csv)
     return dimensions
 end
 
+def vector_to_json(vector)
+    json = vector.to_json
+    puts json
+end 
+
 
 
 # file_size = 1231231231
@@ -50,16 +54,13 @@ df_csv = Daru::DataFrame.read_csv('FanGraphs Leaderboard.csv', liberal_parsing: 
 df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
 
 
-puts df_csv.vectors.inspect
 
 
-puts df_csv['SB'].describe.inspect
 
-# puts test.inspect
-
-# puts df_csv.inspect
-# puts df_excel.inspect
-# puts df_json.inspect
+# puts df_csv['Team']
 
 
+dv = Daru::Vector.new df_csv['Team'], type: :category
+
+vector_to_json(dv.describe)
 

@@ -54,7 +54,13 @@ class Dataframe
     end 
 
     def describe(colname)
-        return @dataframe[colname].describe
+        
+        
+        return @dataframe[colname].describe if @dataframe[colname].type == :numeric
+        if @dataframe[colname].type != :numeric
+            temp_cat = Daru::Vector.new @dataframe[colname], type: :category
+            return temp_cat.describe
+        end 
     end
 
 end 

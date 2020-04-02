@@ -84,12 +84,13 @@ class DatacrunchesController < ApplicationController
     def colstats
         @datacrunch = Datacrunch.find(params[:id])
         @dataframe = Dataframe.new(@datacrunch)
-        stats = @dataframe.describe(params[:colname])
+        @columnname = params[:colname]
+        @stats_vector = @dataframe.describe(params[:colname])
+        
 
-        puts stats.inspect
         respond_to do |format|
             format.html
-            format.js
+            format.js 
         end
     end 
 
