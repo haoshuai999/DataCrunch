@@ -20,19 +20,14 @@
 //MODAL TESTING
 //////////////////////////////////////////
 / Button trigger modal
-%button.btn.btn-primary{"data-target" => "#statsModal", "data-toggle" => "modal", :type => "button"} Launch demo modal
-/ Modal
-#statsModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "statsModalLabel", :role => "dialog", :tabindex => "-1"}
+-# %button.btn.btn-primary{"data-target" => "#statsModal", "data-toggle" => "modal", :type => "button"} Launch demo modal
+#statsModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "statsModalLabel", :role => "dialog"}
     .modal-dialog{:role => "document"}
         .modal-content
-            .modal-header
-                %h5#statsModalLabel.modal-title #{@datacrunch.title}
-                %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-                %span{"aria-hidden" => "true"} ×
-            #statsModalBody.modal-body
-                stats go here
-           
-%div#histogram
+
+
+
+
 ////////////////////////////////////////////////////////////
 
 
@@ -41,9 +36,9 @@
 %h3= link_to 'More rows', datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]+10), :method => :get, :class => 'btn btn-primary'
 
 %table
-    %tr{"data-target" => "#statsModal", "data-toggle" => "modal"}
+    %tr
     - @display_dataframe.vectors.each  do |col| #displays the column names
-        %td.colname= link_to col, datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]), data: {toggle: "modal", target: "#statsModal"}
+        %td.colname= link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
     - @display_dataframe.each(axis = :row) do |r| #displays the dataframe contents
         %tr
         - r.each do |c| 

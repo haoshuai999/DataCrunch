@@ -81,6 +81,18 @@ class DatacrunchesController < ApplicationController
 
     end
 
+    def colstats
+        @datacrunch = Datacrunch.find(params[:id])
+        @dataframe = Dataframe.new(@datacrunch)
+        stats = @dataframe.describe(params[:colname])
+
+        puts stats.inspect
+        respond_to do |format|
+            format.html
+            format.js
+        end
+    end 
+
     def showall
         if session[:username]
             params[:user_login] = session[:username]

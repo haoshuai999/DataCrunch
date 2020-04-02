@@ -93,34 +93,7 @@ module DatacrunchesHelper
     end
     
 
-    # def calc_datacrunch_dimensions(data)
-    #     columns = data[0].length
-    #     rows =  data[1..-1].length
-    #     # puts columns
-    #     # puts rows
-    #     # puts "#{columns} columns and #{rows}"
-    #     return "#{columns} columns and #{rows} rows"
-    # end
-
-
-    # def csv_to_df(csv)
-    #     #csv comes in as an array
-    #     # We turn it to a df for easier manipulation
-       
-        
-    #     # csv.each do |row|
-    #     #     puts row.join(", ")
-    #     # end
-        
-    #     df = Pandas.DataFrame(csv.itself[1..-1], columns=csv.itself[0])
-    #     puts df.shape
-
-    #     # result = `python3 `
-    #     #     puts row
-    #     # end 
-    #     # puts df.describe
-    #     return 1 #Pandas.read_csv(csv)
-    # end
+  
 
 
 
