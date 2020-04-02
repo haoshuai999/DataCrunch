@@ -30,9 +30,8 @@
                 %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
                 %span{"aria-hidden" => "true"} ×
             #statsModalBody.modal-body
-                stats go here
+                %div#histogram
            
-%div#histogram
 ////////////////////////////////////////////////////////////
 
 
@@ -43,7 +42,7 @@
 %table
     %tr{"data-target" => "#statsModal", "data-toggle" => "modal"}
     - @display_dataframe.vectors.each  do |col| #displays the column names
-        %td.colname= link_to col, datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]), data: {toggle: "modal", target: "#statsModal"}
+        %td.colname= link_to col, datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]), data: {toggle: "modal", target: "#statsModal"}, :id => col 
     - @display_dataframe.each(axis = :row) do |r| #displays the dataframe contents
         %tr
         - r.each do |c| 
