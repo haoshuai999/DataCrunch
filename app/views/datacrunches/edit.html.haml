@@ -1,19 +1,35 @@
 - if params[:user_login]
-  %p= params[:user_login]
-  = form_tag datacrunches_path, :method => 'get' do
-    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
-%h1 Data Crunch
-%h2 Edit Existing Datacrunches
+  %div.row
+    %div.col-md-3
+      %p= "Hello, " + params[:user_login]
+    %div.col-md-3
+      = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
+        = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
+%div.row
+  %div.col-md-12 
+    %h1= link_to "Data Crunch", datacrunches_path
+%div.row
+  %div.col-md-12
+    %h2 Edit Existing Datacrunches
 
-= form_tag datacrunch_path(@datacrunches), :method => :put do
-
-  = label :datacrunch, :title, 'Title'
-  = text_field :datacrunch, 'title', placeholder: @datacrunches.title
-
-  = label :datacrunch, :rating, 'Description'
-  = text_field :datacrunch, 'description', placeholder: @datacrunches.description
-
-  = label :datacrunch, :publicity, 'Publicity'
-  = select :datacrunch, :publicity, [['public', true], ['private', false]]
-
-  = submit_tag 'Update Datacrunch Info', :class => 'btn btn-primary'
+%div.row
+  %div.col-md-12
+    = form_tag datacrunch_path(@datacrunches), :method => :put do
+      %div.row.p-3
+        %div.col-md-12
+          = label :datacrunch, :title, 'Title'
+          = text_field :datacrunch, 'title', placeholder: @datacrunches.title
+      
+      %div.row.p-3
+        %div.col-md-12
+          = label :datacrunch, :rating, 'Description'
+          = text_field :datacrunch, 'description', placeholder: @datacrunches.description
+      
+      %div.row.p-3
+        %div.col-md-12
+          = label :datacrunch, :publicity, 'Publicity'
+          = select :datacrunch, :publicity, [['public', true], ['private', false]]
+      
+      %div.row.p-3
+        %div.col-md-12
+          = submit_tag 'Update Datacrunch Info', :class => 'btn btn-primary'

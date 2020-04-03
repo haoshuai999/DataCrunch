@@ -7,18 +7,23 @@ When /^(?:I) click the (.*) link$/ do |link_name|
     click_link(link_name)
 end
 
-#Unused and broken
-# Then /^(?:I) should be on the datacrunches path$/ do
-#     expect(page).to have_current_path(datacrunches_path, ignore_query: true)
-# end 
-
-And /^(?:I) should see the first {colnum} columns from "(.+)"$/ do |colnum, data_file|
+Then /^(?:I) should see (.*) columns from \"(.*)\"$/ do |colnum, data_file|
     id = page.current_url.split("/")[-1]
     
     datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
     dataframe = Dataframe.new(datacrunch)
-    ten_columns = dataframe.dataframe.vectors.to_a[0..colnum-1]
-    page.has_content?(ten_columns)
+    columns = dataframe.dataframe.vectors.to_a[0..colnum.to_i - 1]
+    page.has_content?(columns)
+   
+end
+
+And /^(?:I) should see (.*) rows from \"(.*)\"$/ do |rownum, data_file|
+    id = page.current_url.split("/")[-1]
+    
+    datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
+    dataframe = Dataframe.new(datacrunch)
+    rows = dataframe.dataframe[0..rownum.to_i - 1].to_a
+    page.has_content?(rows)
    
 end
 
