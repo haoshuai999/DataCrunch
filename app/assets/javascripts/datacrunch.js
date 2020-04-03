@@ -1,33 +1,33 @@
-var loadData = function(column_name){
+var loadData = function(){
     $.ajax({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       url: window.location.pathname,
-      dataType: 'text',
+      dataType: 'json',
       success: function(data){
-        drawHistogram(data, column_name);
+        console.log(data);
+        drawHistogram(data["data_json"], data["columnname"]);
       },
       failure: function(result){
         error();
       }
     });
+    console.log("called");
 };
 
 function error() {
     console.log("Something went wrong!");
 }
 
-// draw bar plot
-// function drawBarPlot(data){};
 
-// fetch data on page load
-$(document).ready(function(){
-    $("tr:nth-child(2) td").each(function(i){
-      $(this).on("click", function(){
-        $("svg").remove();
-        var column_name = $("tr:nth-child(2) td:nth-child("+ (i+1) + ") a").text();
-        console.log(i);
-        loadData(column_name); 
-      });
-    });
-});
+// // fetch data on page load
+// $(document).ready(function(){
+//     $("tr:nth-child(2) td").each(function(i){
+//       $(this).on("click", function(){
+//         $("svg").remove();
+//         var column_name = $("tr:nth-child(2) td:nth-child("+ (i+1) + ") a").text();
+//         console.log(i);
+//         loadData(column_name); 
+//       });
+//     });
+// });

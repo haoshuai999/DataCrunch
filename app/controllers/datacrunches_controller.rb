@@ -74,26 +74,28 @@ class DatacrunchesController < ApplicationController
         @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
         # puts @dataframe.dataframe[0..2].inspect
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
+        @data_json = @dataframe.dataframe.to_json
+        response = {:data_json => @data_json, :columnname => session[:colname] }
         respond_to do |format|
             format.html
-            format.text { render plain: @datacrunch.data.url.split("?")[0]}
+            format.json { render :json => response}
         end
 
     
 
-        def colstats
-            @datacrunch = Datacrunch.find(params[:id])
-            @dataframe = Dataframe.new(@datacrunch)
-            @columnname = params[:colname]
-            @stats_vector = @dataframe.describe(params[:colname])
-            
+    def colstats
+        @datacrunch = Datacrunch.find(params[:id])
+        @dataframe = Dataframe.new(@datacrunch)
+        @columnname = params[:colname]
+        @stats_vector = @dataframe.describe(params[:colname])
+        
+        session[:colname] = params[:colname]
 
-            respond_to do |format|
-                format.html
-                format.js 
-            end
-        end 
-    end
+        respond_to do |format|
+            format.html
+            format.js
+        end
+    end 
 
     def showall
         if session[:username]

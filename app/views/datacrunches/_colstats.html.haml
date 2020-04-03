@@ -2,6 +2,8 @@
   %h2#statsModalLabel.modal-title Statistical Summary: #{@columnname}
   %button.close{"data-dismiss" => "modal"} x
 .modal-body
+  -if @dataframe.dataframe[@columnname].type == :numeric
+    %div#histogram
   - @stats_vector.each_with_index  do |value, index| #displays the column names
     %strong.stat= index 
     = value
