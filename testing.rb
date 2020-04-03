@@ -53,14 +53,13 @@ end
 df_csv = Daru::DataFrame.read_csv('FanGraphs Leaderboard.csv', liberal_parsing: true) #Reading a csv
 df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
 
+puts df_csv.vectors.to_a[0..9]
 
 
+# # puts df_csv['Team']
 
 
-# puts df_csv['Team']
+# dv = Daru::Vector.new df_csv['Team'], type: :category
 
-
-dv = Daru::Vector.new df_csv['Team'], type: :category
-
-vector_to_json(dv.describe)
+# vector_to_json(dv.describe)
 

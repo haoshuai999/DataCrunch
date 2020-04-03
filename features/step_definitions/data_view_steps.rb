@@ -1,24 +1,43 @@
 require 'uri'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 require 'csv'
+require "#{Rails.root}/lib/dataframe.rb"
 
 When /^(?:I) click the (.*) link$/ do |link_name|
     click_link(link_name)
 end
 
 
-And /^(?:I) should see my columns from "(.+)"$/ do |data_file|
+And /^(?:I) should see my first 10 columns from "(.+)"$/ do |data_file|
     id = page.current_url.split("/")[-1]
     
     datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
-    
-    columns = display_file(datacrunch).take(1)[0]
-    
-    
-    page.has_content?(columns)
+    dataframe = Dataframe.new(datacrunch)
+    ten_columns = dataframe.dataframe.vectors.to_a[0..9]
+    page.has_content?(ten_columns)
    
 end
 
+And /^(?:I) should see the filename, title, description and dimensions of "(.+)"$/ do |data_file|
+    id = page.current_url.split("/")[-1]
+    datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
+    dataframe = Dataframe.new(datacrunch)
+    
+    #Does it have filename?
+    page.has_content?(datacrunch.data_file_name)
+
+    #Does it have title?
+    page.has_content?(datacrunch.title)
+
+    #Does it have discription?
+    page.has_content?(datacrunch.description)
+
+    #Does it have dimentions?
+    page.has_content?(dataframe.ncols)
+    page.has_content?(dataframe.nrows)
+
+
+end 
 
 def display_file(datacrunch)
     # puts datacrunch.data.methods
