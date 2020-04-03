@@ -24,7 +24,7 @@
 #statsModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "statsModalLabel", :role => "dialog"}
     .modal-dialog{:role => "document"}
         .modal-content
-
+%div#histogram
 
 
 
@@ -38,7 +38,11 @@
 %table
     %tr
     - @display_dataframe.vectors.each  do |col| #displays the column names
+<<<<<<< HEAD
         %td.colname= link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
+=======
+        %td.colname= link_to col, datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]), data: {toggle: "modal", target: "#statsModal"}, :id => col 
+>>>>>>> shuaihao
     - @display_dataframe.each(axis = :row) do |r| #displays the dataframe contents
         %tr
         - r.each do |c| 

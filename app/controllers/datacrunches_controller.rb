@@ -76,7 +76,7 @@ class DatacrunchesController < ApplicationController
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
         respond_to do |format|
             format.html
-            format.text { render plain: @file_path }
+            format.text { render plain: @datacrunch.data.url.split("?")[0]}
         end
 
     end
@@ -111,23 +111,23 @@ class DatacrunchesController < ApplicationController
         end
     end
     
-        def edit
-            @datacrunches = Datacrunch.find(params[:id])
-        end
+    def edit
+        @datacrunches = Datacrunch.find(params[:id])
+    end
 
-        def update
-            @datacrunches = Datacrunch.find(params[:id])
-            @datacrunches.update_attributes!(datacrunch_params)
-            flash[:notice] = "Datacrunch '#{@datacrunches.title}' was successfully updated."
-            redirect_to datacrunches_showall_path
-        end
+    def update
+        @datacrunches = Datacrunch.find(params[:id])
+        @datacrunches.update_attributes!(datacrunch_params)
+        flash[:notice] = "Datacrunch '#{@datacrunches.title}' was successfully updated."
+        redirect_to datacrunches_showall_path
+    end
 
-        def destroy
-        
-            @datacrunches = Datacrunch.find(params[:id])
-            @datacrunches.destroy
-            flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
-            redirect_to datacrunches_showall_path
-        end
+    def destroy
+    
+        @datacrunches = Datacrunch.find(params[:id])
+        @datacrunches.destroy
+        flash[:notice] = "Datacrunch '#{@datacrunches.title}' deleted."
+        redirect_to datacrunches_showall_path
+    end
 
 end
