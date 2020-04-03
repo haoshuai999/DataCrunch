@@ -81,7 +81,7 @@ class DatacrunchesController < ApplicationController
             format.json { render :json => response}
         end
 
-    
+    end
 
     def colstats
         @datacrunch = Datacrunch.find(params[:id])
@@ -96,6 +96,7 @@ class DatacrunchesController < ApplicationController
             format.js
         end
     end 
+
 
     def showall
         if session[:username]
