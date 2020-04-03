@@ -13,7 +13,6 @@ Scenario: CSV Analysis
     And I click on column 1
     Then I should see the summary stats of column 1
 
-# @javascript
 Scenario: Excel Analysis
     Given I am on the index page
     Given I upload a excel file called "data.csv"
@@ -21,7 +20,6 @@ Scenario: Excel Analysis
     And I click on column 1
     Then I should see the summary stats of column 1
 
-# @javascript
 Scenario: JSON Analysis
     Given I am on the index page
     Given I upload a csv file called "data.json"

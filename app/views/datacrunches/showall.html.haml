@@ -1,19 +1,28 @@
 - if params[:user_login]
-  %p= params[:user_login]
-  = form_tag datacrunches_path, :method => 'get' do
-    = submit_tag 'Log out', :class => 'btn btn-primary', :id => 'logout'
-%h1 Data Crunch
+  %div.row
+    %div.col-md-3
+      %p= "Hello, " + params[:user_login]
+    %div.col-md-3
+      = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
+        = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
+%div.row
+  %div.col-md-12 
+    %h1= link_to "Data Crunch", datacrunches_path
 
-= form_tag datacrunches_showall_path, :method => "get" do  
-
-  = search_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
-  = button_tag "Search", :id => 'search_button', :name => nil
+%div.row.mb-2
+  %div.col-md-12 
+    = form_tag datacrunches_showall_path, :method => "get" do
+      %div.row
+        %div.col-md-9 
+          = search_field_tag :search, params[:search], placeholder: "Search", class: "form-control"
+        %div.col-md-3 
+          = button_tag "Search", :id => 'search_button', :class => 'btn btn-primary', :name => nil
 
 #flash-display
   - flash.each do |type, msg|
     %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
       = sanitize(msg) if msg.is_a?(String)
-%table
+%table.table
   %thead
     %tr
       %th 
@@ -28,7 +37,7 @@
   %tbody
     - @datacrunches.each do |crunch|
       %tr
-        %td= button_to 'Delete', datacrunch_path(crunch), :method => "delete", data: {confirm: "Are you sure?"}, :class => 'btn btn-primary'
+        %td= button_to 'Delete', datacrunch_path(crunch), :method => "delete", data: {confirm: "Are you sure?"}, :class => 'btn btn-danger'
         %td= crunch.title
         %td= crunch.description
         %td= crunch.data_file_name
@@ -36,4 +45,4 @@
         %td= crunch.created_at
         %td= crunch.publicity ? "public" : "private"
         %td= link_to "More about #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}", :method => "get"
-        %td= button_to 'Edit', edit_datacrunch_path(crunch), :method => 'get', :class => 'btn btn-primary'
+        %td= button_to 'Edit', edit_datacrunch_path(crunch), :method => 'get', :class => 'btn btn-warning'

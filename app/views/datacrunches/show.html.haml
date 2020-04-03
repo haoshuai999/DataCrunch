@@ -1,20 +1,35 @@
-%h1= link_to "Datacrunch", datacrunches_path 
+- if params[:user_login]
+  %div.row
+    %div.col-md-3
+      %p= "Hello, " + params[:user_login]
+    %div.col-md-3
+      = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
+        = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
+%div.row
+  %div.col-md-12 
+    %h1= link_to "Data Crunch", datacrunches_path 
 
-%p#filename 
-    File name: 
-    %strong #{@datacrunch.data_file_name}
-%p#title 
-    File title: 
-    %strong #{@datacrunch.title}
-%p#description 
-    File description: 
-    %strong #{@datacrunch.description}
-%p#filesize
-    File size:
-    %strong #{@dataSize} 
-%p#filedimensions
-    Data dimensions:
-    %strong #{@dataDimensions} 
+%div.row
+  %div.col-md-6
+    %p#filename 
+      File name: 
+      %strong #{@datacrunch.data_file_name}
+  %div.col-md-6
+    %p#title 
+      File title: 
+      %strong #{@datacrunch.title}
+  %div.col-md-12
+    %p#description 
+      File description: 
+      %strong #{@datacrunch.description}
+  %div.col-md-6
+    %p#filesize
+      File size:
+      %strong #{@dataSize} 
+  %div.col-md-6
+    %p#filedimensions
+      Data dimensions:
+      %strong #{@dataDimensions} 
 
 ////////////////////////////////////////
 //MODAL TESTING
@@ -22,8 +37,8 @@
 / Button trigger modal
 -# %button.btn.btn-primary{"data-target" => "#statsModal", "data-toggle" => "modal", :type => "button"} Launch demo modal
 #statsModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "statsModalLabel", :role => "dialog"}
-    .modal-dialog{:role => "document"}
-        .modal-content
+  .modal-dialog{:role => "document"}
+    .modal-content
 
 
 
@@ -31,14 +46,17 @@
 
 
 //TODO: fix more dimension buttons to fade out after max cols/rows reached
-%h3= button_to 'More columns', datacrunch_path(@datacrunch, :cols => flash[:cols]+10, :rows => flash[:rows]), :method => :get, :class => 'btn btn-primary'
-%h3= button_to 'More rows', datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]+10), :method => :get, :class => 'btn btn-primary'
+%div.row
+  %div.col-md-6
+    %h3= button_to 'More columns', datacrunch_path(@datacrunch, :cols => flash[:cols]+10, :rows => flash[:rows]), :method => :get, :class => 'btn btn-primary'
+  %div.col-md-6
+    %h3= button_to 'More rows', datacrunch_path(@datacrunch, :cols => flash[:cols], :rows => flash[:rows]+10), :method => :get, :class => 'btn btn-primary'
 
-%table
-    %tr
+%table.table
+  %tr
     - @display_dataframe.vectors.each  do |col| #displays the column names
-        %td.colname= link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
+      %td.colname= link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
     - @display_dataframe.each(axis = :row) do |r| #displays the dataframe contents
-        %tr
+      %tr
         - r.each do |c| 
-            %td= c
+          %td= c
