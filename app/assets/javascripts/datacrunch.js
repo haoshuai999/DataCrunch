@@ -6,7 +6,7 @@ var loadData = function(){
       dataType: 'json',
       success: function(data){
         console.log(data);
-        drawHistogram(data["data_url"], data["columnname"]);
+        drawHistogram(data["data_json"], data["columnname"]);
       },
       failure: function(result){
         error();

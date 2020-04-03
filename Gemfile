@@ -47,6 +47,7 @@ gem 'rspec'
 # Use data viz library d3
 gem "d3-rails"
 
+gem "jsonpath"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
