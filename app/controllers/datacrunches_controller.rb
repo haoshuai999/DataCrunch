@@ -79,20 +79,21 @@ class DatacrunchesController < ApplicationController
             format.text { render plain: @datacrunch.data.url.split("?")[0]}
         end
 
+    
+
+        def colstats
+            @datacrunch = Datacrunch.find(params[:id])
+            @dataframe = Dataframe.new(@datacrunch)
+            @columnname = params[:colname]
+            @stats_vector = @dataframe.describe(params[:colname])
+            
+
+            respond_to do |format|
+                format.html
+                format.js 
+            end
+        end 
     end
-
-    def colstats
-        @datacrunch = Datacrunch.find(params[:id])
-        @dataframe = Dataframe.new(@datacrunch)
-        @columnname = params[:colname]
-        @stats_vector = @dataframe.describe(params[:colname])
-        
-
-        respond_to do |format|
-            format.html
-            format.js 
-        end
-    end 
 
     def showall
         if session[:username]

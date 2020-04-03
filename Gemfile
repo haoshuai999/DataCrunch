@@ -42,7 +42,7 @@ gem "paperclip", "~> 6.0.0" #For uploading files and associating them with datac
 gem "csv" #For reading csv's
 gem "roo", '~> 2.7.0' #For reading xslx's
 gem "json_converter"
-gem 'rspec'
+
 
 # Use data viz library d3
 gem "d3-rails"
@@ -63,6 +63,9 @@ group :development, :test do
   gem 'byebug'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'selenium-webdriver'
+  gem 'puma'
+  gem 'rspec-rails'
   # gem 'sqlite3'
 end
 

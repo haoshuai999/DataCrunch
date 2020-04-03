@@ -7,6 +7,10 @@ When /^(?:I) click the (.*) link$/ do |link_name|
     click_link(link_name)
 end
 
+#Unused and broken
+# Then /^(?:I) should be on the datacrunches path$/ do
+#     expect(page).to have_current_path(datacrunches_path, ignore_query: true)
+# end 
 
 And /^(?:I) should see my first 10 columns from "(.+)"$/ do |data_file|
     id = page.current_url.split("/")[-1]
