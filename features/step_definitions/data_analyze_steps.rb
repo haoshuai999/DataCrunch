@@ -12,5 +12,22 @@ And("I click on column {int}") do |int|
 end
 
 Then("I should see the summary stats of column {int}") do |int|
-    puts page.html # Write code here that turns the phrase above into concrete actions
+    id = page.current_url.split("=")[-1]
+    
+    datacrunch = Datacrunch.find(id)
+    dataframe = Dataframe.new(datacrunch)
+   
+    col_names = dataframe.dataframe.vectors.to_a
+    
+    stats = dataframe.describe(col_names[int]).to_a
+
+    page.has_content?(stats)
+    
+    
 end
+
+And("I should see a graph") do
+    puts page.html
+
+end
+
