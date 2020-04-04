@@ -19,7 +19,7 @@ Given /the following datacrunches exist/ do |datacrunches_table|
 end
 
 Then /^(.*) example datacrunches should exist$/ do | n_seeds |
-    Datacrunch.count.should be n_seeds.to_i
+    Datacrunch.count.should == n_seeds.to_i
 end
 
 Then /^I should see (.*) files uploaded by \"(.*)\"$/ do |file_number, user_name|

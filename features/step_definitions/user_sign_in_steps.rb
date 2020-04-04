@@ -8,5 +8,5 @@ Given /the following users exist/ do |users_table|
 end
 
 Then /^(.*) example users should exist$/ do | n_seeds |
-    User.count.should be n_seeds.to_i
+    User.count.should == n_seeds.to_i
 end
