@@ -7,6 +7,7 @@ var loadData = function(){
       success: function(data){
         console.log(data);
         drawHistogram(data["data_json"], data["columnname"]);
+        //Maybe add modal js here?
       },
       failure: function(result){
         error();

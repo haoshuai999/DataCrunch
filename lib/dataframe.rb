@@ -23,9 +23,11 @@ class Dataframe
             #Daru has a native read_json function, but this method gets the info hierachy I think we want
             json_file = JSON.parse(File.open(@file_path).read)
             json_converter = JsonConverter.new
-            csv_json = json_converter.generate_csv json_file
-            csv = CSV.parse(csv_json)
-            @dataframe = Daru::DataFrame.rows(csv[1..-1], order: csv[0]) #This assumes first row in the json are the column names
+            csv_json = json_converter.generate_csv(json_file)
+            
+            csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date])
+            
+            @dataframe = Daru::DataFrame.rows(csv.to_a[1..-1], order: csv.headers) #This assumes first row in the json are the column names
         end
 
         #Store which variables are continuous and categorical
@@ -55,9 +57,10 @@ class Dataframe
 
     def describe(colname)
         
-        
+    
         return @dataframe[colname].describe if @dataframe[colname].type == :numeric
         if @dataframe[colname].type != :numeric
+            
             temp_cat = Daru::Vector.new @dataframe[colname], type: :category
             return temp_cat.describe
         end 
