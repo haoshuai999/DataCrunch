@@ -64,7 +64,6 @@
       %th File_Name
       %th User
       %th Created_Time
-      %th More Info
       %th Publicity
   %tbody
     - @datacrunches.each do |crunch|
@@ -74,5 +73,4 @@
         %td= crunch.data_file_name
         %td= crunch.username
         %td= crunch.created_at
-        -# %td.datacrunch_link= link_to "More about #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}", :method => "get"
         %td= crunch.publicity ? "public" : "private"
