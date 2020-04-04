@@ -36,3 +36,8 @@ Scenario: Only public file visible
     Then I should see row 1 with the name "datacrunch" in column 2
     And I should see row 2 with the name "dummy" in column 2 
 
+# Scenario: Viewing a public file
+#     Given I am on the index page
+#     Then I should see row 1 with the name "datacrunch" in column 1
+#     When I click on the More about datacrunch link
+    
