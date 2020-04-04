@@ -65,7 +65,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'selenium-webdriver'
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
   # gem 'sqlite3'
 end
 
