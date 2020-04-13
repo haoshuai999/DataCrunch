@@ -12,7 +12,7 @@ class DatacrunchesController < ApplicationController
         # Sign up as a new user
         if params[:newusername]
             session[:username] = params[:newusername]
-            flash[:notice] = "#{params[:newusername]} becomes a new registered user for Datacrunch!"
+            flash[:notice] = "#{params[:newusername]} is now a registered user for Datacrunch!"
         elsif params[:user_login]
             session[:username] = params[:user_login]
         elsif session[:username]
@@ -69,7 +69,7 @@ class DatacrunchesController < ApplicationController
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
         # @data = display_file(@datacrunch, flash[:cols], flash[:rows]) #Returns as a csv, flash messages denote dimensions of the data to display
         @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
-    
+      
         @dataframe = Dataframe.new(@datacrunch) #creates workable df from datacruch record
         @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
         # puts @dataframe.dataframe[0..2].inspect
@@ -82,6 +82,15 @@ class DatacrunchesController < ApplicationController
         end
 
     end
+
+    def download
+        datacrunch = Datacrunch.find(params[:id])
+        datacrunch_file_path = get_datacrunch_path(datacrunch)
+        send_file datacrunch_file_path, :type => 'application/json/xlsx/csv/xls', :disposition => 'attachment' #, x_sendfile: true
+        # File.open(datacrunch_file_path, 'r') do |f|
+        #     send_data f.read
+        # end 
+    end 
 
     def colstats
         @datacrunch = Datacrunch.find(params[:id])

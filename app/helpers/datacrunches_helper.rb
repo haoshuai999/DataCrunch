@@ -98,6 +98,15 @@ module DatacrunchesHelper
         json = vector.to_json
         puts json
     end 
+
+    def get_datacrunch_path(datacrunch)
+        path = File.join Rails.root, 'public'
+        file_path_with_timestamp = File.join(path,datacrunch.data.url)
+        file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
+        file_path = file_path_with_timestamp.split("?")[0]
+
+        return file_path
+    end 
   
 
 

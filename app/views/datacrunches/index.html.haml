@@ -1,3 +1,6 @@
+%div.row
+  %div.col-md-12 
+    %h1 DataCrunch
 - if params[:user_login]
   %div.row
     %div.col-md-3
@@ -25,9 +28,7 @@
       = form_tag new_user_path, :method => 'get' do
 
         = submit_tag 'Sign up', :class => 'btn btn-primary'
-%div.row
-  %div.col-md-12 
-    %h1 Data Crunch
+
 
 %div.row
   %div.col-md-12 
@@ -56,15 +57,17 @@
   %div
     = sanitize(msg) if msg.is_a?(String)
 
+%h2 Public DataCrunches
 %table.table
   %thead
     %tr 
-      %th Title
-      %th Descrption
-      %th File_Name
-      %th User
-      %th Created_Time
-      %th Publicity
+      %th{:scope => "col"} Title
+      %th{:scope => "col"} Descrption
+      %th{:scope => "col"} File_Name
+      %th{:scope => "col"} Creator
+      %th{:scope => "col"} Created_Time
+      %th{:scope => "col"} Link
+      -# %th Publicity
   %tbody
     - @datacrunches.each do |crunch|
       %tr
@@ -73,4 +76,5 @@
         %td= crunch.data_file_name
         %td= crunch.username
         %td= crunch.created_at
-        %td= crunch.publicity ? "public" : "private"
+        %td= link_to "View #{crunch.title}", datacrunch_path(crunch), :id => "crunch_#{crunch.id}", :method => "get"
+        -# %td= crunch.publicity ? "public" : "private"
