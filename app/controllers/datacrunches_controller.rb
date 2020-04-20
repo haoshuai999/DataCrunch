@@ -92,8 +92,9 @@ class DatacrunchesController < ApplicationController
         session[:colname] = params[:colname]
 
         respond_to do |format|
-            format.html
-            format.js
+            # The following line needs to be deleted after inplementing the RSpec test
+            format.html { render :partial => "colstats"}
+            format.js { render 'colstats'}
         end
     end 
 

@@ -2,7 +2,7 @@ var loadData = function(){
     $.ajax({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      url: window.location.pathname,
+      url: $(this).attr("href"),
       dataType: 'json',
       success: function(data){
         console.log(data);

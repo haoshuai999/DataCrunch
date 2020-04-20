@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 # Capybara.default_driver = :selenium
+Capybara.javascript_driver = :webkit
 
 # frozen_string_literal: true
 
