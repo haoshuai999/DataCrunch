@@ -1,7 +1,7 @@
 class DatacrunchesController < ApplicationController
     include DatacrunchesHelper
     require "#{Rails.root}/lib/dataframe.rb"
-   
+    require "#{Rails.root}/lib/counter.rb"
     
     def datacrunch_params
         params.require(:datacrunch).permit(:data, :title, :description, :publicity)
@@ -74,8 +74,19 @@ class DatacrunchesController < ApplicationController
         @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
         # puts @dataframe.dataframe[0..2].inspect
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
-        @data_json = @dataframe.dataframe.to_json
-        response = {:data_json => @data_json, :columnname => session[:colname] }
+        # @data_json = @dataframe.dataframe.to_json
+
+        begin
+            @columnvector = @dataframe.dataframe[session[:colname]]
+            @datatype = @dataframe.dataframe[session[:colname]].type
+            counter_obj = Counter.new(@columnvector.to_a).most_common(10).to_h
+            counter_df = Daru::DataFrame.new({:column => counter_obj.keys, :freq => counter_obj.values})
+            @categorical = counter_df.to_json
+            @continuous = @columnvector.to_df.to_json
+        rescue
+            
+        end
+        response = {:datatype => @datatype, :columnname => session[:colname], :categorical => @categorical, :continuous => @continuous}
         respond_to do |format|
             format.html
             format.json { render :json => response}

@@ -6,7 +6,13 @@ var loadData = function(){
       dataType: 'json',
       success: function(data){
         console.log(data);
-        drawHistogram(data["data_json"], data["columnname"]);
+        console.log(data["datatype"]);
+        if (data["datatype"] == 'numeric'){
+          drawHistogram(data["continuous"], data["columnname"]);
+        }
+        else{
+          drawBarchart(data["categorical"], data["columnname"]);
+        }
         //Maybe add modal js here?
       },
       failure: function(result){

@@ -9,7 +9,7 @@ function drawHistogram(data, column_name){
         height = 400 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
-    var svg = d3.select("#histogram")
+    var svg = d3.select("#chart")
     .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -24,11 +24,15 @@ function drawHistogram(data, column_name){
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x))
+        .selectAll("text")
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(45)")
+            .style("text-anchor", "start");
         
         // set the parameters for the histogram
         var histogram = d3.histogram()
-            .value(function(d) { return d[column_name]; })   // I need to give the vector of value
+            .value(function(d) { console.log(d[column_name]); return d[column_name]; })   // I need to give the vector of value
             .domain(x.domain())  // then the domain of the graphic
             .thresholds(x.ticks(70)); // then the numbers of bins
 
