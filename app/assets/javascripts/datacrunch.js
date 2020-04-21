@@ -11,7 +11,7 @@ var loadData = function(){
           drawHistogram(data["continuous"], data["columnname"]);
         }
         else{
-          drawBarchart(data["categorical"], data["columnname"]);
+          drawBarchart(data["categorical"]);
         }
         //Maybe add modal js here?
       },

@@ -1,10 +1,19 @@
 function drawHistogram(data, column_name){
     // var column_name = datafile.shift();
+    if (column_name.includes(".")){
+        column_name_array = column_name.split(".");
+        nested_length = column_name_array.length
+    }
+    else{
+        nested_length = 1
+    }
+
     console.log(data);
     console.log(column_name);
 
+    var num_of_bar = 20
     // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 30, bottom: 30, left: 40},
+    var margin = {top: 10, right: 30, bottom: 75, left: 40},
         width = 460 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -19,8 +28,63 @@ function drawHistogram(data, column_name){
 
     setTimeout(function(){
         // X axis: scale and draw:
+        var min = d3.min(data, function(d) { 
+            if (nested_length == 1){
+                return d[column_name]
+            }
+            else if(nested_length == 2){
+                return d[column_name_array[0]][column_name_array[1]]
+            }
+            else if(nested_length == 3){
+                return d[column_name_array[0]][column_name_array[1]][column_name_array[2]]
+            }
+            else if(nested_length == 4){
+                return d[column_name_array[0]][column_name_array[1]][column_name_array[2]][column_name_array[3]]
+            }
+            else{
+                console.log("error. Too many nested layers")
+            }
+            //return d["Funding"]["Request"];
+        });
+        var max = d3.max(data, function(d) { 
+            // if (column_name.includes(".")){
+            //     column_name_array = column_name.split(".");
+            //     for (let i = 0; i < column_name_array.length - 1; i++){
+            //         d = d[column_name_array[i]];
+            //     }
+            //     console.log(d);
+            // }
+            //console.log(d[column_name_array.pop()]);
+            //return d[column_name_array.pop()];
+            //console.log(d["Funding"]["Request"]);
+            if (nested_length == 1){
+                return d[column_name]
+            }
+            else if(nested_length == 2){
+                return d[column_name_array[0]][column_name_array[1]]
+            }
+            else if(nested_length == 3){
+                return d[column_name_array[0]][column_name_array[1]][column_name_array[2]]
+            }
+            else if(nested_length == 4){
+                return d[column_name_array[0]][column_name_array[1]][column_name_array[2]][column_name_array[3]]
+            }
+            else{
+                console.log("error. Too many nested layers")
+            }
+        });
+        
+        var extra_bar = (max - min)/num_of_bar;
+        if ((min - extra_bar) < 0){
+            min = 0
+        }
+        else{
+            min = min - extra_bar
+        }
+
         var x = d3.scaleLinear()
-            .domain([d3.min(data, function(d) { return +d[column_name] }), d3.max(data, function(d) { return +d[column_name] })])    
+            .domain([min, max + extra_bar])
+            //.domain(d3.extent(data, function(d) { return +d[column_name] }))    
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -32,9 +96,25 @@ function drawHistogram(data, column_name){
         
         // set the parameters for the histogram
         var histogram = d3.histogram()
-            .value(function(d) { console.log(d[column_name]); return d[column_name]; })   // I need to give the vector of value
+            .value(function(d) { 
+                if (nested_length == 1){
+                    return d[column_name]
+                }
+                else if(nested_length == 2){
+                    return d[column_name_array[0]][column_name_array[1]]
+                }
+                else if(nested_length == 3){
+                    return d[column_name_array[0]][column_name_array[1]][column_name_array[2]]
+                }
+                else if(nested_length == 4){
+                    return d[column_name_array[0]][column_name_array[1]][column_name_array[2]][column_name_array[3]]
+                }
+                else{
+                    console.log("error. Too many nested layers")
+                }
+            })   // I need to give the vector of value
             .domain(x.domain())  // then the domain of the graphic
-            .thresholds(x.ticks(70)); // then the numbers of bins
+            .thresholds(x.ticks(num_of_bar)); // then the numbers of bins
 
         // And apply this function to data to get the bins
         var bins = histogram(data);
@@ -54,7 +134,7 @@ function drawHistogram(data, column_name){
             .append("rect")
                 .attr("x", 1)
                 .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
-                .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+                .attr("width", function(d) { return x(d.x1) - x(d.x0); })
                 .attr("height", function(d) { return height - y(d.length); })
                 .style("fill", "#69b3a2")
 

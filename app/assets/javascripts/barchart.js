@@ -1,10 +1,8 @@
-function drawBarchart(data, column_name){
-    // var column_name = datafile.shift();
+function drawBarchart(data){
     console.log(data);
-    console.log(column_name);
 
     // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 30, bottom: 50, left: 40},
+    var margin = {top: 10, right: 30, bottom: 75, left: 40},
         width = 460 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
