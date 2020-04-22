@@ -54,25 +54,21 @@ class DatacrunchesController < ApplicationController
     end
 
     def show
-        #flash is used here because it's accessible haml-side, there may be a more elegant way of doing this
-        if params[:cols] == nil
-            flash[:cols] = 10
-        else
-            flash[:cols] = params[:cols].to_i
-        end
-        if params[:rows] == nil
-            flash[:rows] = 10
-        else 
-            flash[:rows] = params[:rows].to_i
-        end
+        #Determines columns displayed
+        params[:cols] == nil ? (@ncols = 10) : (@ncols = params[:cols].to_i)
+        params[:rows] == nil ? (@nrows = 10) : (@nrows = params[:rows].to_i)
 
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
-        # @data = display_file(@datacrunch, flash[:cols], flash[:rows]) #Returns as a csv, flash messages denote dimensions of the data to display
+       
         @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
-      
+        
+        @datacrunch_file_path = get_datacrunch_path(@datacrunch)
+
         @dataframe = Dataframe.new(@datacrunch) #creates workable df from datacruch record
-        @display_dataframe = @dataframe.limit(flash[:cols], flash[:rows]) #establishes limited dataframe for display
-        # puts @dataframe.dataframe[0..2].inspect
+        @display_dataframe = @dataframe.limit(@ncols, @nrows) #establishes limited dataframe for display
+        #Need to generate an additional dataframe with color scheme
+        @stdev_df = @dataframe.gen_sdev_grid(@ncols, @nrows) #creates second dataframe with stdev values for each numerical column 
+  
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
         @data_json = @dataframe.dataframe.to_json
         response = {:data_json => @data_json, :columnname => session[:colname] }
@@ -86,7 +82,7 @@ class DatacrunchesController < ApplicationController
     def download
         datacrunch = Datacrunch.find(params[:id])
         datacrunch_file_path = get_datacrunch_path(datacrunch)
-        send_file datacrunch_file_path, :type => 'application/json/xlsx/csv/xls', :disposition => 'attachment' #, x_sendfile: true
+        send_file datacrunch_file_path, :disposition => 'attachment' #, x_sendfile: true
         # File.open(datacrunch_file_path, 'r') do |f|
         #     send_data f.read
         # end 

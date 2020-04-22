@@ -55,6 +55,44 @@ class Dataframe
         return @dataframe[0..col+1].first(row+1)
     end 
 
+    def gen_sdev_grid(col, row)
+        limited_df =  @dataframe[0..col+1].first(row+1)
+
+        stdev_df = Daru::DataFrame.new([], order: limited_df.vectors.to_a, index:(0..limited_df.nrows-1).to_a)
+
+        limited_df.vectors.to_a.each do |colname|
+            if limited_df[colname].type == :numeric
+                stats = limited_df[colname].describe
+                stdev = stats[:std]
+                mean = stats[:mean]
+                # puts colname
+                # puts "stddev: " + stdev.to_s
+                # puts "mean: " + mean.to_s
+                limited_df[colname].each_with_index do |rowval,index| #replace first number with num of rows 
+                    # puts "value: " + rowval.to_s
+                    begin
+                        stddevs_from_the_mean  = ((rowval-mean)/stdev).to_i
+                        # raise 'An error has occured.'
+                    rescue 
+                        stddevs_from_the_mean = 1000
+                    end
+                    # stddevs_from_the_mean  = ((rowval-mean)/stdev).to_i
+                    # puts "colname: " + colname
+                    # puts "row index: " + index.to_s
+                    # puts stddevs_from_the_mean
+                    stdev_df[colname][index] = stddevs_from_the_mean
+                    # puts index
+                end 
+        
+            else #Fill column rows with 0's  
+                stdev_df[colname] = Array.new(limited_df.nrows, 0)
+            end  
+        end 
+
+
+        return stdev_df
+    end
+
     def describe(colname)
         
     

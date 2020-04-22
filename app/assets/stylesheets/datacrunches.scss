@@ -4,3 +4,35 @@
 table, tr, th, td {
     border: 1px solid black;
   }
+
+
+
+
+td.top_point_one {
+  background-color: #7b3294;
+}
+
+td.top_two {
+  background-color: #c2a5cf; 
+
+}
+
+td.middle {
+  background-color: #f7f7f7;
+}
+
+td.bottom_two {
+  background-color: #a6dba0;
+}
+
+td.bottom_point_one {
+  background-color: #008837;
+}
+
+table.table.sd_table {
+  color: white;
+  // text-shadow: -0.25px 0 black, 0 0.25px black, 0.25px 0 black, 0 -0.25px black;
+  font-size: small;
+}
+
+

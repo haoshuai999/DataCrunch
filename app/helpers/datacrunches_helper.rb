@@ -108,7 +108,25 @@ module DatacrunchesHelper
         return file_path
     end 
   
+    def cell_class(value)
+        
+        case 
+        when value == -2 
+            set_class = "bottom_two"
+        when value <= -3 
+            set_class = "bottom_point_one"
+        when value == 2  
+            set_class = "top_two"
+        when value >= 3 
+            set_class = "top_point_one"
+        when value > -2 && value < 2 
+            set_class = 'middle'
+        else
+            set_class = "null_value"
+        end 
 
+        return set_class 
+    end 
 
 
 end
