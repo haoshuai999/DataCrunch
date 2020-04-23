@@ -21,6 +21,13 @@ function error() {
 }
 
 
+$(document).ready(function(){
+  
+  // $(".download-btn").append("<i class='material-icons'>face</i>")
+  console.log($(".download-btn"))
+
+});
+
 // // fetch data on page load
 // $(document).ready(function(){
 //     $("tr:nth-child(2) td").each(function(i){

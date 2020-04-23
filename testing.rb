@@ -50,37 +50,45 @@ end
 # converted_size = calc_datacrunch_size(file_size)
 
 
-df_csv = Daru::DataFrame.read_csv('FanGraphs Leaderboard.csv', liberal_parsing: true) #Reading a csv
-# df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
+# df_csv = Daru::DataFrame.read_csv('FanGraphs Leaderboard.csv', liberal_parsing: true) #Reading a csv
+# # df_excel = Daru::DataFrame.read_excel('mock_data.xlsx').call(sheet: 0) 
 
-colored_df = Daru::DataFrame.new([], order: df_csv.vectors.to_a)
+# colored_df = Daru::DataFrame.new([], order: df_csv.vectors.to_a)
 
-df_csv.vectors.to_a.each do |colname|
-    if df_csv[colname].type == :numeric
-        stats = df_csv[colname].describe
-        stdev = stats[:std]
-        mean = stats[:mean]
-        # puts colname
-        # puts "stddev: " + stdev.to_s
-        # puts "mean: " + mean.to_s
-        df_csv[colname].each_with_index do |rowval,index| #replace first number with num of rows 
-            # puts "value: " + rowval.to_s
-            stddevs_from_the_mean  = ((rowval-mean)/stdev).to_i
-            colored_df[colname][index] = stddevs_from_the_mean
-            # puts index
-        end 
+# df_csv.vectors.to_a.each do |colname|
+#     if df_csv[colname].type == :numeric
+#         stats = df_csv[colname].describe
+#         stdev = stats[:std]
+#         mean = stats[:mean]
+#         # puts colname
+#         # puts "stddev: " + stdev.to_s
+#         # puts "mean: " + mean.to_s
+#         df_csv[colname].each_with_index do |rowval,index| #replace first number with num of rows 
+#             # puts "value: " + rowval.to_s
+#             stddevs_from_the_mean  = ((rowval-mean)/stdev).to_i
+#             colored_df[colname][index] = stddevs_from_the_mean
+#             # puts index
+#         end 
 
-    else #Fill column rows with 0's  
-        colored_df[colname] = Array.new(df_csv.nrows, 0)
-    end  
-end 
-
-puts colored_df[2][4]
+#     else #Fill column rows with 0's  
+#         colored_df[colname] = Array.new(df_csv.nrows, 0)
+#     end  
+# end 
 
 # # puts df_csv['Team']
+samples = 1000
+
+a = Daru::Vector.new_with_size(samples) {r=rand(5); r==4 ? nil: r}
 
 
-# dv = Daru::Vector.new df_csv['Team'], type: :category
 
-# vector_to_json(dv.describe)
+puts a
+
+a.delete_if do |val|
+    val.nil?
+end 
+
+puts a.describe
+
+# puts a.describe
 

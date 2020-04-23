@@ -1,6 +1,10 @@
 // Place all the styles related to the datacrunches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 table, tr, th, td {
     border: 1px solid black;
   }
@@ -35,4 +39,11 @@ table.table.sd_table {
   font-size: small;
 }
 
+h1.header{
+  font-weight: bold;
+}
 
+.download_btn {
+  background: url("svgs/get_app-24px.svg");
+
+}

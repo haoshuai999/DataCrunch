@@ -7,34 +7,37 @@
         = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
 %div.row
   %div.col-md-12 
-    %h1= link_to "Data Crunch", datacrunches_path 
+    %h1.header= link_to "Data Crunch", datacrunches_path 
 
 %div.row
   %div.col-md-6
-    %p#filename 
+    %p.fileinfo#filename 
       File name: 
       %strong #{@datacrunch.data_file_name}
-    %p#title 
+    %p.fileinfo#title 
       File title: 
       %strong #{@datacrunch.title}
 
-    %p#description 
+    %p.fileinfo#description 
       File description: 
       %strong #{@datacrunch.description}
 
-    %p#filesize
+    %p.fileinfo#filesize
       File size:
       %strong #{@dataSize} 
 
-    %p#filedimensions
+    %p.fileinfo#filedimensions
       Data dimensions:
       %strong #{@dataDimensions} 
 
-    = link_to 'download', datacrunches_download_path(:id => @datacrunch.id)
+  
+    //Tried adding material design icon to this button. It seems like you cannot have both text and an icon at the same time, unless we change the html tag to <button> instead of <input>
+    //However, it does not seem possible to make a post request (which we would need for the more cols and rows buttons) with just a button.
+    //Instead we might need to wrap it in form_tag.
+    = button_to 'Download', datacrunches_download_path(:id => @datacrunch), :class => "btn btn-success download-btn"
+    -# = button_to 'get_app', datacrunches_download_path(:id => @datacrunch), :class => "btn btn-success download-btn material-icons"
+  
 
-////////////////////////////////////////
-//MODAL TESTING
-//////////////////////////////////////////
 / Button trigger modal
 -# %button.btn.btn-primary{"data-target" => "#statsModal", "data-toggle" => "modal", :type => "button"} Launch demo modal
 #statsModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "statsModalLabel", :role => "dialog"}
@@ -43,12 +46,6 @@
 
 
 
-
-
-////////////////////////////////////////////////////////////
-
-
-//TODO: fix more dimension buttons to fade out after max cols/rows reached
 %div.row
   %div.col-5
   %div.col.text-right
@@ -63,13 +60,16 @@
         %td.top_point_one 
           %span Top 0.1%
   %div.col-2.text-right
+    %h3= button_to 'Fewer columns', datacrunch_path(@datacrunch), params: {:cols => @ncols-10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols < @ncols ? false : "disabled"), :class => (@dataframe.ncols < @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
     %h3= button_to 'More columns', datacrunch_path(@datacrunch), params: {:cols => @ncols+10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols > @ncols ? false : "disabled"), :class => (@dataframe.ncols > @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
   
   
 %table.table
   %tr
     - @display_dataframe.vectors.each  do |col| #displays the column names
-      %td.colname= link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
+      %td.colname
+        -# %div.material-icons search //search icon does not look good. Can't get it on a single line
+        = link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
     - @display_dataframe.each_row_with_index do |r, row_index| #displays the dataframe contents
       %tr
         - r.each_with_index do |c, col_index| 
@@ -77,5 +77,6 @@
 
 %div.row
   %div.col-md-6
+    %h3= button_to 'Fewer rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows-10}, :method => :get, :disabled => (@dataframe.nrows < @nrows ? false : "disabled"), :class => (@dataframe.nrows < @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
     %h3= button_to 'More rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows+10}, :method => :get, :disabled => (@dataframe.nrows > @nrows ? false : "disabled"), :class => (@dataframe.nrows > @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
     

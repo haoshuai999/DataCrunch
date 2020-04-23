@@ -128,5 +128,11 @@ module DatacrunchesHelper
         return set_class 
     end 
 
+    def show_svg(path)
+        File.open("app/assets/svgs/#{path}", "rb") do |file|
+            raw file.read
+        end
+    end 
+
 
 end

@@ -52,17 +52,23 @@ class Dataframe
     end 
 
     def limit(col, row)
-        return @dataframe[0..col+1].first(row+1)
+        return @dataframe[0..col-1].first(row)
     end 
 
-    def gen_sdev_grid(col, row)
-        limited_df =  @dataframe[0..col+1].first(row+1)
 
-        stdev_df = Daru::DataFrame.new([], order: limited_df.vectors.to_a, index:(0..limited_df.nrows-1).to_a)
+    def gen_sdev_grid(col, row)
+        limited_df =  @dataframe[0..col-1].first(row)
+
+        stdev_df = Daru::DataFrame.new([], order: limited_df.vectors.to_a, index:(0..limited_df.nrows).to_a)
 
         limited_df.vectors.to_a.each do |colname|
+            puts colname
             if limited_df[colname].type == :numeric
-                stats = limited_df[colname].describe
+                stats_vector = remove_nils(@dataframe[colname])
+                
+
+                # Daru is a crap library. describe doesn't even work if the column has some nil values
+                stats = stats_vector.describe
                 stdev = stats[:std]
                 mean = stats[:mean]
                 # puts colname
@@ -85,7 +91,7 @@ class Dataframe
                 end 
         
             else #Fill column rows with 0's  
-                stdev_df[colname] = Array.new(limited_df.nrows, 0)
+                stdev_df[colname] = Array.new(limited_df.nrows+1, 0)
             end  
         end 
 
@@ -95,14 +101,29 @@ class Dataframe
 
     def describe(colname)
         
-    
-        return @dataframe[colname].describe if @dataframe[colname].type == :numeric
+        
+        if @dataframe[colname].type == :numeric
+            stats_vector = remove_nils(@dataframe[colname]) #remove nils so describe can work properly
+            return stats_vector.describe 
+        end 
+        
+
+
         if @dataframe[colname].type != :numeric
             
             temp_cat = Daru::Vector.new @dataframe[colname], type: :category
             return temp_cat.describe
         end 
     end
+
+    def remove_nils(column_vector)
+        col_without_nils = column_vector
+        col_without_nils.delete_if do |val| #removes nil values from numeric columns so .describe can work properly
+            val.nil?
+        end 
+
+        return col_without_nils
+    end 
 
 end 
 
