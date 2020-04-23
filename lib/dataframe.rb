@@ -101,7 +101,6 @@ class Dataframe
 
     def describe(colname)
         
-        
         if @dataframe[colname].type == :numeric
             stats_vector = remove_nils(@dataframe[colname]) #remove nils so describe can work properly
             return stats_vector.describe 
@@ -111,7 +110,8 @@ class Dataframe
 
         if @dataframe[colname].type != :numeric
             
-            temp_cat = Daru::Vector.new vector, type: :category
+            stats_vector = remove_nils(@dataframe[colname])
+            temp_cat = Daru::Vector.new stats_vector, type: :category
             return temp_cat.describe
         end 
     end

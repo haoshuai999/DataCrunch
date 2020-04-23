@@ -77,7 +77,10 @@ class DatacrunchesController < ApplicationController
             @datatype = @columnvector.type
 
             counter_obj = Counter.new(@columnvector.to_a).most_common(10).to_h
-            counter_obj[:null] = counter_obj.delete nil
+            if @columnvector.size - @columnvector.count > 0
+                counter_obj[:null] = counter_obj.delete nil
+            end
+
             counter_df = Daru::DataFrame.new({:column => counter_obj.keys, :freq => counter_obj.values})
             if Counter.new(@columnvector.to_a).keys.length > 10
                 other_value = @dataframe.nrows - counter_df[:freq].sum
