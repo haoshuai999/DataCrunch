@@ -2,11 +2,17 @@ var loadData = function(){
     $.ajax({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      url: window.location.pathname,
+      url: $(this).attr("href"),
       dataType: 'json',
       success: function(data){
         console.log(data);
-        drawHistogram(data["data_json"], data["columnname"]);
+        console.log(data["datatype"]);
+        if (data["datatype"] == 'numeric'){
+          drawHistogram(data["continuous"], data["columnname"]);
+        }
+        else{
+          drawBarchart(data["categorical"]);
+        }
         //Maybe add modal js here?
       },
       failure: function(result){

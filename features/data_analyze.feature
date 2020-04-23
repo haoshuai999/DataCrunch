@@ -6,7 +6,7 @@ Feature: Analyze data
 
 #first three steps of each scenario outlined in data_view_steps
 
-# @javascript
+#@javascript
 Scenario: CSV Analysis
     Given I am on the index page
     Given I upload a csv file called "data.csv"
@@ -15,7 +15,7 @@ Scenario: CSV Analysis
     Then I should see the summary stats of column 2
   
 
-# @javascript
+#@javascript
 Scenario: Excel Analysis
     Given I am on the index page
     Given I upload a excel file called "data.csv"
@@ -24,7 +24,7 @@ Scenario: Excel Analysis
     Then I should see the summary stats of column 2
   
 
-# @javascript
+#@javascript
 Scenario: JSON Analysis
     Given I am on the index page
     Given I upload a csv file called "data.json"

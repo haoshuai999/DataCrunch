@@ -111,13 +111,13 @@ class Dataframe
 
         if @dataframe[colname].type != :numeric
             
-            temp_cat = Daru::Vector.new @dataframe[colname], type: :category
+            temp_cat = Daru::Vector.new vector, type: :category
             return temp_cat.describe
         end 
     end
 
     def remove_nils(column_vector)
-        col_without_nils = column_vector
+        col_without_nils = column_vector.deep_dup
         col_without_nils.delete_if do |val| #removes nil values from numeric columns so .describe can work properly
             val.nil?
         end 

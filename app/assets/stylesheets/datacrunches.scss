@@ -5,12 +5,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-table, tr, th, td {
-    border: 1px solid black;
-  }
-
-
-
 
 td.top_point_one {
   background-color: #7b3294;
@@ -43,7 +37,13 @@ h1.header{
   font-weight: bold;
 }
 
-.download_btn {
-  background: url("svgs/get_app-24px.svg");
+// .download_btn {
+//   background: url("svgs/get_app-24px.svg");
 
+// }
+// table, tr, th, td {
+//     border: 1px solid black;
+//   }
+.modal-text{
+  word-wrap: break-word;
 }

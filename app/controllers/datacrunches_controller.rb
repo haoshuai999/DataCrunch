@@ -1,7 +1,7 @@
 class DatacrunchesController < ApplicationController
     include DatacrunchesHelper
     require "#{Rails.root}/lib/dataframe.rb"
-   
+    require "#{Rails.root}/lib/counter.rb"
     
     def datacrunch_params
         params.require(:datacrunch).permit(:data, :title, :description, :publicity)
@@ -70,8 +70,25 @@ class DatacrunchesController < ApplicationController
         @stdev_df = @dataframe.gen_sdev_grid(@ncols, @nrows) #creates second dataframe with stdev values for each numerical column 
   
         @dataDimensions = "#{@dataframe.ncols} columns and #{@dataframe.nrows} rows" #returns shape of full dataframe
-        @data_json = @dataframe.dataframe.to_json
-        response = {:data_json => @data_json, :columnname => session[:colname] }
+        # @data_json = @dataframe.dataframe.to_json
+
+        begin
+            @columnvector = @dataframe.dataframe[session[:colname]]
+            @datatype = @columnvector.type
+
+            counter_obj = Counter.new(@columnvector.to_a).most_common(10).to_h
+            counter_obj[:null] = counter_obj.delete nil
+            counter_df = Daru::DataFrame.new({:column => counter_obj.keys, :freq => counter_obj.values})
+            if Counter.new(@columnvector.to_a).keys.length > 10
+                other_value = @dataframe.nrows - counter_df[:freq].sum
+                counter_df.add_row(["Other values", other_value])
+            end
+            @categorical = counter_df.to_json
+            @continuous = @columnvector.to_df.to_json
+        rescue
+            
+        end
+        response = {:datatype => @datatype, :columnname => session[:colname], :categorical => @categorical, :continuous => @continuous}
         respond_to do |format|
             format.html
             format.json { render :json => response}
@@ -92,13 +109,23 @@ class DatacrunchesController < ApplicationController
         @datacrunch = Datacrunch.find(params[:id])
         @dataframe = Dataframe.new(@datacrunch)
         @columnname = params[:colname]
-        @stats_vector = @dataframe.describe(params[:colname])
-        
         session[:colname] = params[:colname]
+        columnvector = @dataframe.dataframe[params[:colname]]
+        
+        
+        @stats_vector = @dataframe.describe(params[:colname])
+        unique_percent = (columnvector.uniq.size / @dataframe.nrows.to_f * 100).round(2).to_s + '%'
+        missing_value = columnvector.size - columnvector.count
+        missing_percent = (missing_value / columnvector.size.to_f * 100).round(2).to_s + '%'
+        @stats_vector.concat(unique_percent, :unique_percent)
+        @stats_vector.concat(missing_value, :missing_value)
+        @stats_vector.concat(missing_percent, :missing_percent)
+        
 
         respond_to do |format|
-            format.html
-            format.js
+            # The following line needs to be deleted after inplementing the RSpec test
+            format.html { render :partial => "colstats"}
+            format.js { render 'colstats'}
         end
     end 
 

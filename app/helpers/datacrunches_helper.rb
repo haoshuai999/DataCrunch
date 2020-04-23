@@ -1,14 +1,9 @@
-
-
-
-
 module DatacrunchesHelper
     require 'csv'
     require 'roo'
     require 'json'
     require 'json_converter'
     require "#{Rails.root}/lib/dataframe.rb"
-
    
     
     ####################################################
