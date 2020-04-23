@@ -1,0 +1,22 @@
+clusterId,postId,imageUrl,platform,platformPostId,timestamp,distance,userPlatformId
+8,11344,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_78cbb952-d22a-449e-98c0-5941ea176dbd.gif,4chan,239474438,01/13/2020	 16:41:10,0,Anonymous
+8,440687,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_ff659886-db0c-4887-b181-4bf4a9ba670f.png,4chan,239828172,01/16/2020	 22:27:23,0.0625,Anonymous
+8,184342,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_966f7667-4461-4f00-af9b-6c85337846d3.png,4chan,239683496,01/15/2020	 15:36:26,0.1875,Anonymous
+8,11257,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_d8bd5f68-c0e3-4443-b0df-055a0501b20e.png,4chan,239470712,01/13/2020	 15:49:19,0.1875,Anonymous
+8,421537,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_28e9055f-ed61-4f14-8005-470e5da8b872.png,4chan,239812659,01/16/2020	 19:38:22,0.1875,Anonymous
+8,174592,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_83d35270-c201-488f-9cec-4c2213848d62.gif,4chan,239680324,01/15/2020	 14:55:36,0.1875,Anonymous
+8,5593,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_f83619e5-7fb1-41b6-ba38-5f2d582559e6.png,4chan,239168068,01/10/2020	 15:51:46,0.25,Anonymous
+8,28626,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_2d9a0e5e-9a31-44a3-ac2d-a125e5a2b882.gif,4chan,239484291,01/13/2020	 18:52:10,0.25,Anonymous
+8,438767,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_96ff6b94-03e2-45f7-b3b0-9fcc2711de8d.png,4chan,239827678,01/16/2020	 22:21:56,0.25,Anonymous
+8,287114,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_614eff1a-f91c-4ff6-99c4-b6d3f4bacd02.gif,4chan,239711384,01/15/2020	 21:00:39,0.25,Anonymous
+8,440686,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_5934f4b7-2b57-48f1-8f37-f02b1432e687.png,4chan,239828163,01/16/2020	 22:27:16,0.3125,Anonymous
+8,433770,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_52a82d02-7e64-476f-931d-a88da461d56e.png,4chan,239820469,01/16/2020	 21:01:31,0.3125,Anonymous
+8,4760,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_fcfc6018-aa6e-4fff-9b57-fedb7ffee6d5.png,4chan,239166360,01/10/2020	 15:33:39,0.3125,Anonymous
+8,174589,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_efa6f8ae-607b-4b3a-b455-5045df2dcbe3.png,4chan,239680159,01/15/2020	 14:53:03,0.3125,Anonymous
+8,135591,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_a6038a61-f62a-404d-8e5d-df7fe62d1d4b.png,4chan,239596610,01/14/2020	 20:30:19,0.3125,Anonymous
+8,90960,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_33848b85-562b-4264-aafd-804f97cd0bf6.png,4chan,239585024,01/14/2020	 18:22:04,0.3125,Anonymous
+245,146346,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_68e57c2b-b05d-49d4-963a-844bf4b1297a.png,4chan,239601692,01/14/2020	 21:25:47,0.5625,Anonymous
+245,434333,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_b8a06461-24d5-4d5b-91a1-fd9bdb1f4774.png,4chan,239826238,01/16/2020	 22:05:53,0.5625,Anonymous
+245,226026,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_c4185076-256a-4f53-a131-4dc6ffb9720a.png,4chan,239692206,01/15/2020	 17:24:23,0.5625,Anonymous
+245,496750,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_49c19ac0-51ff-4b22-8fd6-3ff4f7ac19b9.png,4chan,239843343,01/17/2020	 01:14:22,0.5625,Anonymous
+245,309579,https://memebucket-v0.s3.amazonaws.com/post_images/4chan_dc91a145-4a9f-4f5a-8fc8-bb9aaa5936b1.png,4chan,239716485,01/15/2020	 21:57:15,0.625,Anonymous

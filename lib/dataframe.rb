@@ -62,7 +62,7 @@ class Dataframe
         stdev_df = Daru::DataFrame.new([], order: limited_df.vectors.to_a, index:(0..limited_df.nrows).to_a)
 
         limited_df.vectors.to_a.each do |colname|
-            puts colname
+           
             if limited_df[colname].type == :numeric
                 stats_vector = remove_nils(@dataframe[colname])
                 
