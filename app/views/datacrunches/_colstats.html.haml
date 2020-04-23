@@ -4,7 +4,12 @@
 .modal-body
   %div#chart
   - @stats_vector.each_with_index  do |value, index| #displays the column names
-    %strong.stat= index 
-    = value
-    %br
+    %div.row
+      %div.col-md-6
+        %strong.stat= "#{index}:"
+      %div.col-md-6.modal-text
+        -if value.class == Float
+          = value.round(2)
+        -else
+          = value
 

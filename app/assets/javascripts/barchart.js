@@ -2,7 +2,7 @@ function drawBarchart(data){
     console.log(data);
 
     // set the dimensions and margins of the graph
-    var margin = {top: 10, right: 30, bottom: 75, left: 40},
+    var margin = {top: 30, right: 30, bottom: 75, left: 40},
         width = 460 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -57,6 +57,16 @@ function drawBarchart(data){
                 return height - y(d.freq);
             })
             .style("fill", "#69b3a2");
+
+        svg.selectAll(".bartext")
+            .data(data)
+            .enter().append("text")
+            .attr("class", "bartext")
+            .attr("text-anchor", "middle")
+            .attr("x", function(d) { return x(d.column) + 15; })
+            .attr("y", function(d) { return y(d.freq) -5 ; })
+            .text(function(d) { return d.freq; })
+            .style("font-size", "13px");
 
     },200);
  

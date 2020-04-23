@@ -57,11 +57,18 @@ class Dataframe
 
     def describe(colname)
         
-    
-        return @dataframe[colname].describe if @dataframe[colname].type == :numeric
-        if @dataframe[colname].type != :numeric
+        vector = @dataframe[colname].deep_dup
+        nil_index = vector.indexes(nil)
+        if !nil_index.empty?
+            nil_index.each do |index|
+                vector.delete_at(index)
+            end
+        end
+
+        return vector.describe if vector.type == :numeric
+        if vector.type != :numeric
             
-            temp_cat = Daru::Vector.new @dataframe[colname], type: :category
+            temp_cat = Daru::Vector.new vector, type: :category
             return temp_cat.describe
         end 
     end
