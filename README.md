@@ -2,34 +2,24 @@
 
 Team members: Aaron Brezel (ab4717) and Shuai Hao (sh3831)
 
-## [Heroku link](https://calm-garden-33614.herokuapp.com/)
+## [Link](https://calm-garden-33614.herokuapp.com/)
 
-### User stories
+### What is DataCrunch?
 
-| As a journalist                            |
-|--------------------------------------------|
-| So that I can maintain my work on the site |
-| I want to be able to sign up a new account |
+DataCrunch is a website dedicated towards simplifying data analysis. 
 
-| As a journalist                            |
-|--------------------------------------------|
-| So that I can maintain my work on the site |
-| I want to be able to log in |
+Its developers, Shuai Hao and Aaron Brezel are journalists as well as engineers. During their time working in newsrooms, they noticed how many good reporters struggled to work with data. That's because They were being overserved by complex tools like Excel and Tableau. Too many options and not enough guidance. 
 
-| As a journalist                            |
-|--------------------------------------------|
-| So that I can see my data |
-| I want to upload a file |
+That's where DataCrunch comes in. It's designed to make data analysis as simple as possible. All users need to do is upload the file they want to analyze. Currently we support csvs, excel workbooks and json files. DataCrunch does all the processing for you and presents critical data like a column-by-column statistical breakdown. 
 
-| As a journalist                            |
-|--------------------------------------------|
-| So that I see my data |
-| I want to see the columns of my dataset |
+With DataCrunch, there's no code, no confusing menus and no random clicking to find what you need. It's just the basics. Check it out. Understand your data. 
 
-| As a journalist                            |
-|--------------------------------------------|
-| So that I can manage my data files easily |
-| I want to see a list showing all the files I upload |
+### Running the app
+
+To run this app locally, clone this repo and navigate to the DataCrunch folder with your command line. With rails ~4.2 installed and a working postgresql server, run `rails server` to start the app.
+
+To run all cucumber feature tests at the same time, run the command `rake cucumber features`. To test features individually, find the feature that you with to test in the /features directory. Then, you can run `rake cucumber features/[feature_name].feature`.  
+
 
 
 
