@@ -55,8 +55,8 @@ class DatacrunchesController < ApplicationController
 
     def show
         #Determines columns displayed
-        params[:cols] == nil ? (@ncols = 10) : (@ncols = params[:cols].to_i)
-        params[:rows] == nil ? (@nrows = 10) : (@nrows = params[:rows].to_i)
+        params[:cols] == nil ||  params[:cols] < "10" ? (@ncols = 10) : (@ncols = params[:cols].to_i)
+        params[:rows] == nil || params[:rows] < "10" ? (@nrows = 10) : (@nrows = params[:rows].to_i)
 
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
        
@@ -65,6 +65,8 @@ class DatacrunchesController < ApplicationController
         @datacrunch_file_path = get_datacrunch_path(@datacrunch)
 
         @dataframe = Dataframe.new(@datacrunch) #creates workable df from datacruch record
+   
+        
         @display_dataframe = @dataframe.limit(@ncols, @nrows) #establishes limited dataframe for display
         #Need to generate an additional dataframe with color scheme
         @stdev_df = @dataframe.gen_sdev_grid(@ncols, @nrows) #creates second dataframe with stdev values for each numerical column 

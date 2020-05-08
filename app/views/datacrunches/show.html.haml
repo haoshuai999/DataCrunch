@@ -7,7 +7,7 @@
         = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
 %div.row
   %div.col-md-12 
-    %h1.header= link_to "Data Crunch", datacrunches_path 
+    %h1.header= link_to "DataCrunch", datacrunches_path 
 
 %div.row
   %div.col-md-6
@@ -17,6 +17,11 @@
     %p.fileinfo#title 
       File title: 
       %strong #{@datacrunch.title}
+
+    %p.fileinfo#author 
+      Author: 
+      %strong= (@datacrunch.username != nil ? @datacrunch.username : "No Author") 
+  
 
     %p.fileinfo#description 
       File description: 
@@ -60,7 +65,9 @@
         %td.top_point_one 
           %span Top 0.1%
   %div.col-2.text-right
-    %h3= button_to 'Fewer columns', datacrunch_path(@datacrunch), params: {:cols => @ncols-10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols < @ncols ? false : "disabled"), :class => (@dataframe.ncols < @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
+    %p dataframe cols #{@dataframe.ncols}
+    %p display cols #{@ncols}
+    %h3= button_to 'Fewer columns', datacrunch_path(@datacrunch), params: {:cols => @ncols-10, :rows => @nrows}, :method => :get, :disabled => (@ncols <= 10 ? "disabled": false), :class => (@ncols <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
     %h3= button_to 'More columns', datacrunch_path(@datacrunch), params: {:cols => @ncols+10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols > @ncols ? false : "disabled"), :class => (@dataframe.ncols > @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
   
   
@@ -77,6 +84,8 @@
 
 %div.row
   %div.col-md-6
-    %h3= button_to 'Fewer rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows-10}, :method => :get, :disabled => (@dataframe.nrows < @nrows ? false : "disabled"), :class => (@dataframe.nrows < @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
+    %p dataframe rows #{@dataframe.nrows}
+    %p display rows #{@nrows}
+    %h3= button_to 'Fewer rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows-10}, :method => :get, :disabled => (@nrows <= 10 ? "disabled": false), :class => (@nrows <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
     %h3= button_to 'More rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows+10}, :method => :get, :disabled => (@dataframe.nrows > @nrows ? false : "disabled"), :class => (@dataframe.nrows > @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
     

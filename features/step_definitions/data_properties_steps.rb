@@ -7,27 +7,8 @@ When /^(?:I) click the (.*) link$/ do |link_name|
     click_link(link_name)
 end
 
-Then /^(?:I) should see (.*) columns from \"(.*)\"$/ do |colnum, data_file|
-    id = page.current_url.split("/")[-1]
-    
-    datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
-    dataframe = Dataframe.new(datacrunch)
-    columns = dataframe.dataframe.vectors.to_a[0..colnum.to_i - 1]
-    page.has_content?(columns)
-   
-end
 
-And /^(?:I) should see (.*) rows from \"(.*)\"$/ do |rownum, data_file|
-    id = page.current_url.split("/")[-1]
-    
-    datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
-    dataframe = Dataframe.new(datacrunch)
-    rows = dataframe.dataframe[0..rownum.to_i - 1].to_a
-    page.has_content?(rows)
-   
-end
-
-And /^(?:I) should see the filename, title, description and dimensions of "(.+)"$/ do |data_file|
+Then /^(?:I) should see the filename, title, description, author and dimensions of "(.+)"$/ do |data_file|
     id = page.current_url.split("/")[-1]
     datacrunch = Datacrunch.find_by! data_file_name: data_file, id: id
     dataframe = Dataframe.new(datacrunch)
@@ -41,12 +22,21 @@ And /^(?:I) should see the filename, title, description and dimensions of "(.+)"
     #Does it have discription?
     page.has_content?(datacrunch.description)
 
+    #Does it have an author?
+    
+    page.has_content?(datacrunch.username) if datacrunch.username != nil
+     
+
+    
     #Does it have dimentions?
     page.has_content?(dataframe.ncols)
     page.has_content?(dataframe.nrows)
 
 
 end 
+
+
+
 
 def display_file(datacrunch)
     # puts datacrunch.data.methods
