@@ -75,22 +75,12 @@ class DatacrunchesController < ApplicationController
         begin
             @columnvector = @dataframe.dataframe[session[:colname]]
             @datatype = @columnvector.type
-
-            counter_obj = Counter.new(@columnvector.to_a).most_common(10).to_h
-            if @columnvector.size - @columnvector.count > 0
-                counter_obj[:null] = counter_obj.delete nil
-            end
-
-            counter_df = Daru::DataFrame.new({:column => counter_obj.keys, :freq => counter_obj.values})
-            if Counter.new(@columnvector.to_a).keys.length > 10
-                other_value = @dataframe.nrows - counter_df[:freq].sum
-                counter_df.add_row(["Other values", other_value])
-            end
-            @categorical = counter_df.to_json
-            @continuous = @columnvector.to_df.to_json
+            @categorical = Datacrunch.process_categorical(@dataframe, @columnvector)
+            @continuous = Datacrunch.process_continous(@columnvector)
         rescue
             
         end
+        
         response = {:datatype => @datatype, :columnname => session[:colname], :categorical => @categorical, :continuous => @continuous}
         respond_to do |format|
             format.html
