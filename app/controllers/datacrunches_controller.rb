@@ -80,7 +80,7 @@ class DatacrunchesController < ApplicationController
         rescue
             
         end
-        
+
         response = {:datatype => @datatype, :columnname => session[:colname], :categorical => @categorical, :continuous => @continuous}
         respond_to do |format|
             format.html
@@ -103,16 +103,8 @@ class DatacrunchesController < ApplicationController
         @dataframe = Dataframe.new(@datacrunch)
         @columnname = params[:colname]
         session[:colname] = params[:colname]
-        columnvector = @dataframe.dataframe[params[:colname]]
-        
-        
-        @stats_vector = @dataframe.describe(params[:colname])
-        unique_percent = (columnvector.uniq.size / @dataframe.nrows.to_f * 100).round(2).to_s + '%'
-        missing_value = columnvector.size - columnvector.count
-        missing_percent = (missing_value / columnvector.size.to_f * 100).round(2).to_s + '%'
-        @stats_vector.concat(unique_percent, :unique_percent)
-        @stats_vector.concat(missing_value, :missing_value)
-        @stats_vector.concat(missing_percent, :missing_percent)
+
+        @stats_vector = Datacrunch.describe_data(@dataframe, params[:colname])
         
 
         respond_to do |format|

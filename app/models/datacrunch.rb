@@ -26,4 +26,20 @@ class Datacrunch < ActiveRecord::Base
     def self.process_continous(vector)
         return vector.to_df.to_json
     end
+
+    def self.describe_data(dataframe, colname)
+        columnvector = dataframe.dataframe[colname]
+        
+        
+        stats_vector = dataframe.describe(colname)
+        unique_percent = (columnvector.uniq.size / dataframe.nrows.to_f * 100).round(2).to_s + '%'
+        missing_value = columnvector.size - columnvector.count
+        missing_percent = (missing_value / columnvector.size.to_f * 100).round(2).to_s + '%'
+        stats_vector.concat(unique_percent, :unique_percent)
+        stats_vector.concat(missing_value, :missing_value)
+        stats_vector.concat(missing_percent, :missing_percent)
+
+        return stats_vector
+        
+    end
 end

@@ -5,8 +5,7 @@ require "#{Rails.root}/lib/dataframe.rb"
 
 
 And("I click on column {int}") do |int|
-    column = page.all(".colname").values_at(int)
-
+    column = page.all(".colname").values_at(int - 1)
 
     click_link(column[0].text)
 
@@ -21,7 +20,7 @@ Then("I should see the summary stats of column {int}") do |int|
    
     col_names = dataframe.dataframe.vectors.to_a
     
-    stats = dataframe.describe(col_names[int]).to_a
+    stats = Datacrunch.describe_data(dataframe, col_names[int]).to_a
 
     page.has_content?(stats)
     

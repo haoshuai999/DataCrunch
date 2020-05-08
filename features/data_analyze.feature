@@ -10,7 +10,7 @@ Scenario: CSV Analysis
     Given I am on the index page
     Given I upload a csv file called "data.csv"
     When I click the here link
-    And I click on column 1
+    And I click on column 2
     Then I should see the summary stats of column 2
   
 
@@ -18,7 +18,7 @@ Scenario: Excel Analysis
     Given I am on the index page
     Given I upload a excel file called "data.csv"
     When I click the here link
-    And I click on column 1
+    And I click on column 2
     Then I should see the summary stats of column 2
   
 
@@ -26,6 +26,6 @@ Scenario: JSON Analysis
     Given I am on the index page
     Given I upload a csv file called "data.json"
     When I click the here link
-    And I click on column 1
+    And I click on column 2
     Then I should see the summary stats of column 2
  
