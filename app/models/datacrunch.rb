@@ -8,6 +8,7 @@ class Datacrunch < ActiveRecord::Base
     def self.process_categorical(dataframe, vector)
         displayed_columns = 10
         counter_obj = Counter.new(vector.to_a).most_common(displayed_columns).to_h
+        # puts counter_obj
         if vector.size - vector.count > 0
             counter_obj[:null] = counter_obj.delete nil
             displayed_columns -= 1

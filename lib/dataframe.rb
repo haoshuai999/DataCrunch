@@ -25,7 +25,7 @@ class Dataframe
             json_converter = JsonConverter.new
             csv_json = json_converter.generate_csv(json_file)
             
-            csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date])
+            csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date], empty_value: nil)
             
             @dataframe = Daru::DataFrame.rows(csv.to_a[1..-1], order: csv.headers) #This assumes first row in the json are the column names
         end
