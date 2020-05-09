@@ -3,8 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 body {
   font-family: 'Open Sans', sans-serif;
+  background-image: url(image-path("herringbone.png")) //repeat 0 0;
 }
 
+.container {
+  background: white;
+}
 
 td.top_point_one {
   background-color: #7b3294;

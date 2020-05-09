@@ -69,7 +69,7 @@
     %h3= button_to 'More columns', datacrunch_path(@datacrunch), params: {:cols => @ncols+10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols > @ncols ? false : "disabled"), :class => (@dataframe.ncols > @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
   
   
-%table.table
+%table.table.overflow-auto
   %tr
     - @display_dataframe.vectors.each  do |col| #displays the column names
       %td.colname
