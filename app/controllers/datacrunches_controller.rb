@@ -77,22 +77,12 @@ class DatacrunchesController < ApplicationController
         begin
             @columnvector = @dataframe.dataframe[session[:colname]]
             @datatype = @columnvector.type
-
-            counter_obj = Counter.new(@columnvector.to_a).most_common(10).to_h
-            if @columnvector.size - @columnvector.count > 0
-                counter_obj[:null] = counter_obj.delete nil
-            end
-
-            counter_df = Daru::DataFrame.new({:column => counter_obj.keys, :freq => counter_obj.values})
-            if Counter.new(@columnvector.to_a).keys.length > 10
-                other_value = @dataframe.nrows - counter_df[:freq].sum
-                counter_df.add_row(["Other values", other_value])
-            end
-            @categorical = counter_df.to_json
-            @continuous = @columnvector.to_df.to_json
+            @categorical = Datacrunch.process_categorical(@dataframe, @columnvector)
+            @continuous = Datacrunch.process_continous(@columnvector)
         rescue
             
         end
+
         response = {:datatype => @datatype, :columnname => session[:colname], :categorical => @categorical, :continuous => @continuous}
         respond_to do |format|
             format.html
@@ -115,16 +105,8 @@ class DatacrunchesController < ApplicationController
         @dataframe = Dataframe.new(@datacrunch)
         @columnname = params[:colname]
         session[:colname] = params[:colname]
-        columnvector = @dataframe.dataframe[params[:colname]]
-        
-        
-        @stats_vector = @dataframe.describe(params[:colname])
-        unique_percent = (columnvector.uniq.size / @dataframe.nrows.to_f * 100).round(2).to_s + '%'
-        missing_value = columnvector.size - columnvector.count
-        missing_percent = (missing_value / columnvector.size.to_f * 100).round(2).to_s + '%'
-        @stats_vector.concat(unique_percent, :unique_percent)
-        @stats_vector.concat(missing_value, :missing_value)
-        @stats_vector.concat(missing_percent, :missing_percent)
+
+        @stats_vector = Datacrunch.describe_data(@dataframe, params[:colname])
         
 
         respond_to do |format|
