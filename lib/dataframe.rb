@@ -64,7 +64,7 @@ class Dataframe
         limited_df.vectors.to_a.each do |colname|
            
             if limited_df[colname].type == :numeric
-                stats_vector = remove_nils(@dataframe[colname])
+                stats_vector = remove_nils(@dataframe[colname]) #Produces either a numeric vector or a vector of all nils
                 
 
                 # Daru is a crap library. describe doesn't even work if the column has some nil values
@@ -80,7 +80,7 @@ class Dataframe
                         stddevs_from_the_mean  = ((rowval-mean)/stdev).to_i
                         # raise 'An error has occured.'
                     rescue 
-                        stddevs_from_the_mean = 1000
+                        stddevs_from_the_mean = 0
                     end
                     # stddevs_from_the_mean  = ((rowval-mean)/stdev).to_i
                     # puts "colname: " + colname
@@ -116,8 +116,8 @@ class Dataframe
         end 
     end
 
-    def remove_nils(column_vector)
-        col_without_nils = column_vector.deep_dup
+    def remove_nils(column_vector) #This apparently doesn't work if all the values in the vector are nil??? Why would they design the vector like that?
+        col_without_nils = column_vector.clone
         col_without_nils.delete_if do |val| #removes nil values from numeric columns so .describe can work properly
             val.nil?
         end 

@@ -56,17 +56,15 @@
   %div.col.text-right
     %table.table.sd_table
       %tr
-        %td.bottom_point_one 
+        %td.legend_bottom_point_one 
           %span bottom 0.1%
-        %td.bottom_two 
+        %td.legend_bottom_two 
           %span bottom 2.0%
-        %td.top_two 
+        %td.legend_top_two 
           %span Top 2.0%
-        %td.top_point_one 
+        %td.legend_top_point_one 
           %span Top 0.1%
   %div.col-2.text-right
-    %p dataframe cols #{@dataframe.ncols}
-    %p display cols #{@ncols}
     %h3= button_to 'Fewer columns', datacrunch_path(@datacrunch), params: {:cols => @ncols-10, :rows => @nrows}, :method => :get, :disabled => (@ncols <= 10 ? "disabled": false), :class => (@ncols <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
     %h3= button_to 'More columns', datacrunch_path(@datacrunch), params: {:cols => @ncols+10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols > @ncols ? false : "disabled"), :class => (@dataframe.ncols > @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
   
@@ -84,8 +82,6 @@
 
 %div.row
   %div.col-md-6
-    %p dataframe rows #{@dataframe.nrows}
-    %p display rows #{@nrows}
     %h3= button_to 'Fewer rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows-10}, :method => :get, :disabled => (@nrows <= 10 ? "disabled": false), :class => (@nrows <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
     %h3= button_to 'More rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows+10}, :method => :get, :disabled => (@dataframe.nrows > @nrows ? false : "disabled"), :class => (@dataframe.nrows > @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
     

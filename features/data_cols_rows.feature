@@ -51,7 +51,6 @@ Scenario: Upload json
     And the "Fewer rows" button should be disabled
 
 Scenario: Upload xlsx
-    Given I am on the index page
     Given I upload a xlsx file called "data.xlsx"
     When I click the here link
     Then I should see 10 columns from "data.xlsx"

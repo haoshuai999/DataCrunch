@@ -76,19 +76,53 @@ end
 # end 
 
 # # puts df_csv['Team']
-samples = 1000
+# samples = 1000
 
-a = Daru::Vector.new_with_size(samples) {r=rand(5); r==4 ? nil: r}
+# a = Daru::Vector.new_with_size(samples) {r=rand(5); r==4 ? nil: r}
+
+data_sheet = Daru::DataFrame.read_excel("data.xlsx").call(sheet: 0) #call function tells daru to only read the first sheet
+
+num_crossposts = data_sheet["num_crossposts"]
+selftext = data_sheet['selftext']
+
+selftext_nonils = selftext.clone
+
+# puts selftext_nonils.describe.inspect
+
+# test = Daru::Vector.new([1,2,3,nil,nil,4,5], index: [:a, :b, :c, :d, :e, :f, :g], name: :bazinga)
 
 
 
-puts a
 
-a.delete_if do |val|
-    val.nil?
-end 
+# test.delete_if do |val| #removes nil values from numeric columns so .describe can work properly
+#     val.nil?
+# end 
 
-puts a.describe
+# puts test.describe.inspect
+
+# selftext_nonils.concat(4,260)
+
+puts num_crossposts.describe.inspect
+
+# selftext_nonils.delete_if do |val| #removes nil values from numeric columns so .describe can work properly
+#     val.nil?
+# end 
+
+# puts selftext_nonils.inspect
+# puts selftext_nonils.inspect
+
+
+# puts num_crossposts.inspect
+
+
+
+# puts a
+
+# a.delete_if do |val|
+#     val.nil?
+# end 
 
 # puts a.describe
+
+# # puts a.describe
 
