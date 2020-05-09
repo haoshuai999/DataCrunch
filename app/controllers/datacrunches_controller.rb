@@ -1,5 +1,4 @@
 class DatacrunchesController < ApplicationController
-    include DatacrunchesHelper
     require "#{Rails.root}/lib/dataframe.rb"
     require "#{Rails.root}/lib/counter.rb"
     
@@ -60,9 +59,9 @@ class DatacrunchesController < ApplicationController
 
         @datacrunch = Datacrunch.find(params[:id]) # look up datacrunch by unique ID
        
-        @dataSize = calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
+        @dataSize = Datacrunch.calc_datacrunch_size(@datacrunch.data_file_size) #Return a formatted file size 
         
-        @datacrunch_file_path = get_datacrunch_path(@datacrunch)
+        @datacrunch_file_path = Datacrunch.get_datacrunch_path(@datacrunch)
 
         @dataframe = Dataframe.new(@datacrunch) #creates workable df from datacruch record
    
@@ -93,7 +92,7 @@ class DatacrunchesController < ApplicationController
 
     def download
         datacrunch = Datacrunch.find(params[:id])
-        datacrunch_file_path = get_datacrunch_path(datacrunch)
+        datacrunch_file_path = Datacrunch.get_datacrunch_path(datacrunch)
         send_file datacrunch_file_path, :disposition => 'attachment' #, x_sendfile: true
         # File.open(datacrunch_file_path, 'r') do |f|
         #     send_data f.read

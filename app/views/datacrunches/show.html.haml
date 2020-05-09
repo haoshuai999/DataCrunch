@@ -78,7 +78,7 @@
     - @display_dataframe.each_row_with_index do |r, row_index| #displays the dataframe contents
       %tr
         - r.each_with_index do |c, col_index| 
-          %td{ :class => cell_class(@stdev_df[col_index][row_index]) }= c #cell_class is called in datacrunches_helper.rb
+          %td{ :class => Datacrunch.cell_class(@stdev_df[col_index][row_index]) }= c 
 
 %div.row
   %div.col-md-6
