@@ -1,13 +1,13 @@
 - if params[:user_login]
-  %div.row
-    %div.col-md-3
+  %div.row.header-row
+    %div.col-md
+      %h1.header= link_to "Data Crunch", datacrunches_path
+    %div.col-md-auto
       %p= "Hello, " + params[:user_login]
-    %div.col-md-3
+    %div.col-md-2
       = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
         = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
-%div.row
-  %div.col-md-12 
-    %h1= link_to "Data Crunch", datacrunches_path
+
 
 %div.row.mb-2
   %div.col-md-12 

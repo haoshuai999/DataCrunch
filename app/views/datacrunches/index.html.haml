@@ -1,22 +1,24 @@
-%div.row
-  %div.col-md-12 
-    %h1.header= link_to "DataCrunch", datacrunches_path 
 - if params[:user_login]
-  %div.row
-    %div.col-md-3
+  %div.row.header-row
+    %div.col-md
+      %h1.header= link_to "DataCrunch", datacrunches_path 
+    %div.col-md-auto
       %p= "Hello, " + params[:user_login]
-    %div.col-md-3
+    %div.col-md-2.form-group
+      = form_tag datacrunches_showall_path, :method => 'get' do
+        = submit_tag 'My datacrunches', :class => 'btn btn-primary', :id => 'showall'
+    %div.col-md-2.form-group
       = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
         = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
-  %div.row
-    %div.col-md-12
-      = form_tag datacrunches_showall_path, :method => 'get' do
-        = submit_tag 'Show all datacrunches', :class => 'btn btn-primary', :id => 'showall'
+  
 - else
-  %div.row
-    %div.col-md-9
+  %div.row.header-row
+    %div.col-md-3
+      %h1.header= link_to "DataCrunch", datacrunches_path 
+    %div.col-md-1
+    %div.col-md.form-group
       = form_tag datacrunches_path, :id => "login_form" do
-
+  
         -# = label :user, :username, 'User Name'
         = text_field :user, 'username', value: params[:username], :placeholder => "username"
 
@@ -24,7 +26,7 @@
         = text_field :user, "password", :placeholder => "password"
 
         = submit_tag 'Log in', :class => 'btn btn-primary'
-    %div.col-md-3
+    %div.col-md-1.form-group
       = form_tag new_user_path, :method => 'get' do
 
         = submit_tag 'Sign up', :class => 'btn btn-primary'

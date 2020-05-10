@@ -32,7 +32,7 @@ Scenario: Only public file visible
     Given I am on the index page
     Then I should see row 1 with the name "datacrunch" in column 1
     And I should see 1 data records
-    When I click the "Show all datacrunches" button
+    When I click the "My datacrunches" button
     Then I should see row 1 with the name "datacrunch" in column 2
     And I should see row 2 with the name "dummy" in column 2 
 

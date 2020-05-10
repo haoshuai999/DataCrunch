@@ -28,7 +28,7 @@ Background: users and datacrunches have been added to database and the user has 
     When I click the "Log in" button
     Then I should see "jim123"
 
-    When I click the "Show all datacrunches" button
+    When I click the "My datacrunches" button
     Then I should be redirected to the show all page
 
 Scenario: Search successfully
