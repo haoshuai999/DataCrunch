@@ -10,6 +10,10 @@ body {
   background: white;
 }
 
+span.dim-buttons {
+  margin: 5px;
+}
+
 td.top_point_one {
   background-color: #7b3294;
 }
@@ -57,12 +61,23 @@ td.legend_bottom_point_one {
 
 
 // CSS for table
+div.table-col {
+  overflow-x: auto;
+  white-space: nowrap;
+  height: 500px;
+  overflow-y: auto;
+}
 
 table.table.sd_table {
   color: white;
   // text-shadow: -0.25px 0 black, 0 0.25px black, 0.25px 0 black, 0 -0.25px black;
   font-size: small;
 }
+
+// tr.headers{
+//   width:100%;
+//   table-layout:fixed;
+// }
 
 h1.header{
   font-weight: bold;

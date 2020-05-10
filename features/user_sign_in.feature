@@ -28,4 +28,4 @@ Scenario: User successfully sign in and log out
     When I click the "Log in" button
     Then I should see "jim123"
     When I click the "Log out" button
-    Then I should see "User Name"
+    Then I should see the "Login" form

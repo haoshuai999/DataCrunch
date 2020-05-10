@@ -1,6 +1,6 @@
 %div.row
   %div.col-md-12 
-    %h1 DataCrunch
+    %h1.header= link_to "DataCrunch", datacrunches_path 
 - if params[:user_login]
   %div.row
     %div.col-md-3
@@ -17,11 +17,11 @@
     %div.col-md-9
       = form_tag datacrunches_path, :id => "login_form" do
 
-        = label :user, :username, 'User Name'
-        = text_field :user, 'username', value: params[:username]
+        -# = label :user, :username, 'User Name'
+        = text_field :user, 'username', value: params[:username], :placeholder => "username"
 
-        = label :user, :password, 'Password'
-        = text_field :user, "password"
+        -# = label :user, :password, 'Password'
+        = text_field :user, "password", :placeholder => "password"
 
         = submit_tag 'Log in', :class => 'btn btn-primary'
     %div.col-md-3

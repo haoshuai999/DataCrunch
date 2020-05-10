@@ -52,8 +52,7 @@
 
 
 %div.row
-  %div.col-5
-  %div.col.text-right
+  %div.col-5.text-right
     %table.table.sd_table
       %tr
         %td.legend_bottom_point_one 
@@ -64,24 +63,28 @@
           %span Top 2.0%
         %td.legend_top_point_one 
           %span Top 0.1%
-  %div.col-2.text-right
-    %h3= button_to 'Fewer columns', datacrunch_path(@datacrunch), params: {:cols => @ncols-10, :rows => @nrows}, :method => :get, :disabled => (@ncols <= 10 ? "disabled": false), :class => (@ncols <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
-    %h3= button_to 'More columns', datacrunch_path(@datacrunch), params: {:cols => @ncols+10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols > @ncols ? false : "disabled"), :class => (@dataframe.ncols > @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
+  %div.col-3
+  %div.col-3.btn-group
+    %span.dim-buttons= button_to 'Fewer columns', datacrunch_path(@datacrunch), params: {:cols => @ncols-10, :rows => @nrows}, :method => :get, :disabled => (@ncols <= 10 ? "disabled": false), :class => (@ncols <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
+    %span.dim-buttons= button_to 'More columns', datacrunch_path(@datacrunch), params: {:cols => @ncols+10, :rows => @nrows}, :method => :get, :disabled => (@dataframe.ncols > @ncols ? false : "disabled"), :class => (@dataframe.ncols > @ncols ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
   
-  
-%table.table.overflow-auto
-  %tr
-    - @display_dataframe.vectors.each  do |col| #displays the column names
-      %td.colname
-        -# %div.material-icons search //search icon does not look good. Can't get it on a single line
-        = link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
-    - @display_dataframe.each_row_with_index do |r, row_index| #displays the dataframe contents
-      %tr
-        - r.each_with_index do |c, col_index| 
-          %td{ :class => cell_class(@stdev_df[col_index][row_index]) }= c #cell_class is called in datacrunches_helper.rb
+%div.row
+  %div.col.table-col
+    %table.table
+      %tr.headers
+        - @display_dataframe.vectors.each  do |col| #displays the column names
+          %td.colname
+            -# %div.material-icons search //search icon does not look good. Can't get it on a single line
+            = link_to col, datacrunches_colstats_path(:colname => col, :id => @datacrunch.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => "#statsModal"}
+        - @display_dataframe.each_row_with_index do |r, row_index| #displays the dataframe contents
+          %tr.table-data
+            - r.each_with_index do |c, col_index| 
+              %td{ :class => cell_class(@stdev_df[col_index][row_index]) }= c #cell_class is called in datacrunches_helper.rb
 
 %div.row
-  %div.col-md-6
-    %h3= button_to 'Fewer rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows-10}, :method => :get, :disabled => (@nrows <= 10 ? "disabled": false), :class => (@nrows <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
-    %h3= button_to 'More rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows+10}, :method => :get, :disabled => (@dataframe.nrows > @nrows ? false : "disabled"), :class => (@dataframe.nrows > @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
+  %div.col.btn-group
+    %span.dim-buttons= button_to 'Fewer rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows-10}, :method => :get, :disabled => (@nrows <= 10 ? "disabled": false), :class => (@nrows <= 10 ? 'btn-sm btn-secondary': 'btn-sm btn-primary') 
+    %span.dim-buttons= button_to 'More rows', datacrunch_path(@datacrunch), params: {:cols => @ncols, :rows => @nrows+10}, :method => :get, :disabled => (@dataframe.nrows > @nrows ? false : "disabled"), :class => (@dataframe.nrows > @nrows ? 'btn-sm btn-primary' : 'btn-sm btn-secondary') 
+  
+    
        

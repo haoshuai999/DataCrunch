@@ -10,3 +10,7 @@ end
 Then /^(.*) example users should exist$/ do | n_seeds |
     User.count.should be n_seeds.to_i
 end
+
+Then /^I should see the "(.+)" form$/ do |form_type|
+    expect(page).to have_css("#login_form")
+end 
