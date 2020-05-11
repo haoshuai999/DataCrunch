@@ -9,7 +9,7 @@
         = submit_tag 'My datacrunches', :class => 'btn btn-primary', :id => 'showall'
     %div.col-md-2.form-group
       = form_tag datacrunches_path(params[:user_login] => nil), :method => 'get' do
-        = submit_tag 'Log out', :class => 'btn btn-warning btn-sm', :id => 'logout'
+        = submit_tag 'Log out', :class => 'btn btn-warning', :id => 'logout'
   
 - else
   %div.row.header-row
@@ -26,7 +26,7 @@
         = text_field :user, "password", :placeholder => "password"
 
         = submit_tag 'Log in', :class => 'btn btn-primary'
-    %div.col-md-1.form-group
+    %div.col-md-2.form-group
       = form_tag new_user_path, :method => 'get' do
 
         = submit_tag 'Sign up', :class => 'btn btn-primary'
