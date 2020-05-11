@@ -8,6 +8,7 @@ class Datacrunch < ActiveRecord::Base
     def self.process_categorical(dataframe, vector)
         displayed_columns = 10
         counter_obj = Counter.new(vector.to_a).most_common(displayed_columns).to_h
+        # puts counter_obj
         if vector.size - vector.count > 0
             counter_obj[:null] = counter_obj.delete nil
             displayed_columns -= 1
@@ -42,4 +43,59 @@ class Datacrunch < ActiveRecord::Base
         return stats_vector
         
     end
+
+    def self.calc_datacrunch_size(file_size)
+        #file_size comes in in bytes, need to convert to readable format
+        #print bytes, kb, mb and gb
+        num_digits = file_size.to_s.length
+    
+        if num_digits < 3    
+            converted_size = file_size.to_s + " Bytes"
+        elsif num_digits >= 3 && num_digits < 6
+            to_kb = (file_size.to_f/1000).round(2)
+            converted_size = to_kb.to_s + " KB"
+        elsif num_digits >= 6 && num_digits < 9
+            to_mb = (file_size.to_f/1000000).round(2)
+            converted_size = to_mb.to_s + " MB"
+        elsif num_digits >= 9 && num_digits < 12
+            to_mb = (file_size.to_f/1000000000).round(2)
+            converted_size = to_mb.to_s + " GB"
+        #Can add more if statements to handle larger files
+        end
+        return converted_size
+    end
+
+    def self.get_datacrunch_path(datacrunch)
+        path = File.join Rails.root, 'public'
+        file_path_with_timestamp = File.join(path,datacrunch.data.url)
+        file_path = file_path_with_timestamp.split("?")[0]
+
+        return file_path
+    end 
+  
+    def self.cell_class(value)
+        
+        case 
+        when value == -2 
+            set_class = "bottom_two"
+        when value <= -3 
+            set_class = "bottom_point_one"
+        when value == 2  
+            set_class = "top_two"
+        when value >= 3 
+            set_class = "top_point_one"
+        when value > -2 && value < 2 
+            set_class = 'middle'
+        else
+            set_class = "null_value"
+        end 
+
+        return set_class 
+    end 
+
+    # def show_svg(path)
+    #     File.open("app/assets/svgs/#{path}", "rb") do |file|
+    #         raw file.read
+    #     end
+    # end 
 end

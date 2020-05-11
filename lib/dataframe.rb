@@ -4,14 +4,10 @@ class Dataframe
     attr_accessor :file_path, :dataframe, :cat, :cont
     
     def initialize(datacrunch)
-        #Calculating the file path
-        path = File.join Rails.root, 'public'
-        file_path_with_timestamp = File.join(path,datacrunch.data.url)
-        file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
-        file_path = file_path_with_timestamp.split("?")[0]
         
-        #Assigning the filepath
-        @file_path = file_path
+        #Calculate and assign the filepath
+        file_ext = File.extname(datacrunch.data.url).downcase.split("?")[0]
+        @file_path = Datacrunch.get_datacrunch_path(datacrunch)
 
         case file_ext
         when ".csv"
@@ -25,7 +21,7 @@ class Dataframe
             json_converter = JsonConverter.new
             csv_json = json_converter.generate_csv(json_file)
             
-            csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date])
+            csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date], empty_value: nil)
             
             @dataframe = Daru::DataFrame.rows(csv.to_a[1..-1], order: csv.headers) #This assumes first row in the json are the column names
         end

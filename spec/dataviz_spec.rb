@@ -102,7 +102,7 @@ describe DatacrunchesController do
                 json_converter = JsonConverter.new
                 csv_json = json_converter.generate_csv(json_file)
                 
-                csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date])
+                csv = CSV.parse(csv_json, headers: true, converters: %i[numeric date], empty_value: nil)
                 
                 @dataframe = Daru::DataFrame.rows(csv.to_a[1..-1], order: csv.headers)
             end
@@ -140,7 +140,7 @@ describe DatacrunchesController do
                 expect(@categorical).to be_an_instance_of(Array)
                 expect(@categorical[-1][:freq]).to eq(1)
                 # The following test is not ideal, because the label for missing values should be null
-                expect(@categorical[-1][:column]).to eq("")
+                expect(@categorical[-1][:column]).to eq(:null)
                 expect(@categorical.length).to eq(3)
             end
         end
