@@ -16,7 +16,12 @@ With DataCrunch, there's no code, no confusing menus and no random clicking to f
 
 ### Running the app
 
-To run this app locally, clone this repo and navigate to the DataCrunch folder with your command line. With rails ~4.2 installed and a working postgresql server, run `rails server` to start the app.
+To run this app locally, clone this repo and navigate to the DataCrunch folder with your command line. With rails ~4.2 installed and a working postgresql server:
+1. run `bundle install` to install all the necessary libraries. 
+2. run `sudo service postgresql start` to start the PostgreSQL database.
+3. run `rake db:migrate` to initialize the database.
+4. run `rake db:seed` to load some default data for the database. (Optional)
+5. run `rails server` to start the app.
 
 To run all cucumber feature tests at the same time, run the command `rake cucumber features`. To test features individually, find the feature that you with to test in the /features directory. Then, you can run `rake cucumber features/[feature_name].feature`.
 
